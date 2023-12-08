@@ -10,7 +10,7 @@ const CardWrapper = ({
   className?: string;
 }) => {
   return (
-    <div className={`bg-white p-8 shadow rounded-lg ${className}`}>
+    <div className={`bg-white p-8 shadow rounded-xl ${className}`}>
       <h2 className='text-2xl font-bold'>{title}</h2>
 
       {children}
