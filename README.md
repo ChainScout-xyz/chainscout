@@ -1,8 +1,9 @@
 <img width="1371" alt="Screenshot 2023-12-09 at 22 52 57" src="https://github.com/ChainScout-xyz/chainscout/assets/90386676/61138ae3-048e-40dc-a794-88a70593577e">
 
-Analyze onchain transactions to find your target audience, create ad campaigns, and reward them for their interaction.
 
-🌏 website : https://chainscout.xyz/
+**Analyze onchain transactions to find your target audience, create ad campaigns, and reward them for their interaction.**
+
+🌏 website: https://chainscout.xyz/
 
 # Motivations
 
