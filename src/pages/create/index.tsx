@@ -2,7 +2,7 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import PageLayout from '@/components/UI/PageLayout';
 import FilterCampaign from '@/components/shared/FilterCampaign';
-import { Flex, Select, Switch, Text } from '@radix-ui/themes';
+import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 
 const Create = () => {
@@ -178,13 +178,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                   >
                     Campaign Name{' '}
                   </label>
-                  <div className='w-full'>
-                    <input
-                      type='text'
-                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
-                      required
-                    />
-                  </div>
+
+                  <TextField.Input size="3" placeholder="" />
+
+
                 </div>
                 <div className='pt-4'>
                   <label
@@ -208,10 +205,9 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     Message{' '}
                   </label>
                   <div className='w-full'>
-                    <textarea
+                    <TextArea
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
                       required
                     />
                   </div>
@@ -248,11 +244,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     Reward Per Wallet{' '}
                   </label>
                   <div className='w-full'>
-                    <input
-                      type='text'
+                    <TextField.Input size="3"
+                      type='number'
                       value={rewardPerWallet}
                       onChange={(e) => setRewardPerWallet(e.target.value)}
-                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
                       required
                     />
                   </div>
@@ -283,11 +278,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     Capacity{' '}
                   </label>
                   <div className='w-full'>
-                    <input
+                    <TextField.Input size="3"
                       type='text'
                       value={capacity}
                       onChange={(e) => setCapacity(e.target.value)}
-                      className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
                       required
                     />
                   </div>
