@@ -1,18 +1,25 @@
-import Button from "@/components/UI/Button"
-import CardWrapper from "@/components/UI/CardWrapper"
-import ContainerWrapper from "@/components/UI/ContainerWrapper"
-import PageLayout from "@/components/UI/PageLayout"
-import RewardCard from "@/components/shared/RewardCard"
-import { MagicWandIcon } from "@radix-ui/react-icons"
-import { LogInWithAnonAadhaar, useAnonAadhaar } from "anon-aadhaar-react"
-import dynamic from "next/dynamic"
-import { useEffect, useState } from "react"
-import useWindowSize from 'react-use/lib/useWindowSize'
+import Button from "@/components/UI/Button";
+import CardWrapper from "@/components/UI/CardWrapper";
+import ContainerWrapper from "@/components/UI/ContainerWrapper";
+import dynamic from 'next/dynamic';
+
+import RewardCard from "@/components/shared/RewardCard";
+import useMetamask from "@/hooks/useMetamask";
+import { MagicWandIcon } from "@radix-ui/react-icons";
+import { LogInWithAnonAadhaar, useAnonAadhaar } from "anon-aadhaar-react";
+import { useEffect, useState } from "react";
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 const Confetti = dynamic(
     () => import('react-confetti'),
     { ssr: false }
 );
+
+const PageLayout = dynamic(
+    () => import('@/components/UI/PageLayout'), {
+    ssr: false
+}
+)
 
 
 const ClaimPage = () => {
@@ -21,6 +28,12 @@ const ClaimPage = () => {
     const [rewardClaimed, setRewardClaimed] = useState(false);
     const [anonAadhaar] = useAnonAadhaar();
     const { width, height } = useWindowSize();
+    const {
+        connect,
+        disconnect,
+        account,
+        connected, provider, chainId
+    } = useMetamask();
 
     useEffect(() => {
         console.log("Anon Aadhaar status: ", anonAadhaar.status);

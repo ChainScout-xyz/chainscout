@@ -1,14 +1,19 @@
 import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
-import PageLayout from '@/components/UI/PageLayout';
 import FilterCampaign from '@/components/shared/FilterCampaign';
+import useMetamask from '@/hooks/useMetamask';
 import { shortenAddress } from '@/utils';
-import { useSDK } from '@metamask/sdk-react';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
 
+const PageLayout = dynamic(
+  () => import('@/components/UI/PageLayout'), {
+  ssr: false
+}
+)
 
 const Create = () => {
   const [message, setMessage] = useState<string>('');
@@ -23,30 +28,12 @@ const Create = () => {
   );
   const [filteredResults, setFilteredResults] = useState<string[]>([]);
 
-  const [account, setAccount] = useState<string>();
-  const { sdk, connected, provider, chainId } = useSDK();
-
-  const connect = async () => {
-    try {
-      const accounts = await sdk?.connect();
-      setAccount((accounts as any)?.[0]);
-      console.log('here')
-    } catch (err) {
-      console.warn(`failed to connect..`, err);
-    }
-  };
-
-
-  const disconnect = async () => {
-    try {
-      setAccount('');
-      await sdk?.disconnect();
-      // setAccount((accounts as any)?.[0]);
-      console.log('disconnected')
-    } catch (err) {
-      console.warn(`failed to connect..`, err);
-    }
-  };
+  const {
+    connect,
+    disconnect,
+    account,
+    connected, provider, chainId
+  } = useMetamask();
 
 
   // complete this function
