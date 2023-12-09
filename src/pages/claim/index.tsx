@@ -24,6 +24,7 @@ const PageLayout = dynamic(
 
 const ClaimPage = () => {
     const [loading, setLoading] = useState(false)
+
     const [allowed, setAllowedStatus] = useState(false)
     const [rewardClaimed, setRewardClaimed] = useState(false);
     const [anonAadhaar] = useAnonAadhaar();
@@ -106,7 +107,7 @@ const ClaimPage = () => {
                                                 await verifyUserAction();
                                             }}>
                                             <MagicWandIcon className="mr-2" />
-                                            Verify
+                                            {loading ? 'Loading...' : 'Verify'}
                                         </Button>
 
                                     </> : <>
