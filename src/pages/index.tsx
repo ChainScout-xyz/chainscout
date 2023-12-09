@@ -6,7 +6,6 @@ import { CardStackIcon, RocketIcon, TargetIcon } from '@radix-ui/react-icons';
 import { Select } from '@radix-ui/themes';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,13 +30,6 @@ const FeatureCard = ({
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    (async function handler() {
-      const response = await fetch('/api/integration/onchainInfo');
-      console.log(response);
-    })();
-  }, []);
-
   return (
     <ContainerWrapper>
 
@@ -56,7 +48,7 @@ export default function Home() {
               title='Filter target data'
               description='Filter the analyzed target audience by setting mandatory requirements'
             />
-             <FeatureCard
+            <FeatureCard
               icon={<KeyboardIcon className='w-10 h-10 mb-2' />}
               title='Create Campaign'
               description='Configure the ad campaign and select communication method to reach your target audience'
