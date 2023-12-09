@@ -2,7 +2,7 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
 import FilterCampaign from '@/components/shared/FilterCampaign';
-import { abi, addressConfig, rpcConfig } from '@/constants/contract';
+import { abi, allChainAddress, rpcConfig } from '@/constants/contract';
 import useMetamask from '@/hooks/useMetamask';
 import { shortenAddress } from '@/utils';
 import { useSDK } from '@metamask/sdk-react';
@@ -10,6 +10,7 @@ import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/theme
 import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import XMTPSendMessage from '../api/integration/xmtp';
 
 
 const PageLayout = dynamic(
@@ -43,34 +44,36 @@ const Create = () => {
 
 
   const run = async () => {
-
-    await sendXMTPMessage()
-
-    try {
-      const chainId = 80001
-      // console.log(provider)
-      const _provider = new ethers.providers.JsonRpcProvider(rpcConfig[chainId])
-      const wallet = new ethers.Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY!, _provider)
-      console.log(wallet.address)
-      const contract = new ethers.Contract(addressConfig[chainId], abi, wallet)
-      const create = await contract.createAirdrop(
-        campaignName,
-        // number of people who can get
-        capacity,
-        // total amount of tokens
-        Number(capacity) * Number(rewardPerWallet),
-        // anonaadhar?
-        true,
-        // verification
-        "1inch_verification",
-        {
-          value: ethers.utils.parseEther("10")
-        }
-      )
-      console.log(create)
+    try{
+      await sendXMTPMessage();
+      const chainId = 11155111
+    // console.log(provider)
+    const _provider = new ethers.providers.JsonRpcProvider((window as any).ethereum)
+    await (window as any).ethereum.request({"method": "eth_requestAccounts"});
+    const signer = _provider.getSigner()
+    
+    // const wallet = new ethers.Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY!, _provider)
+    // console.log(wallet.address)
+    const contract = new ethers.Contract(allChainAddress, abi, signer)
+    const value = Number(capacity) * Number(rewardPerWallet)
+    const create = await contract.createAirdrop(
+      campaignName,
+      // number of people who can get
+      capacity,
+      // total amount of tokens
+      value,
+      // anonaadhar?
+      true,
+      // verification
+      "1inch_verification",
+      {
+        value: ethers.utils.parseEther(value.toString())
+      }
+    )
+    console.log(create)
     }
-    catch (e) {
-      console.log(e)
+    catch(err) {
+      console.error(err)
     }
   }
 

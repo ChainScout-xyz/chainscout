@@ -14,12 +14,12 @@ module.exports = {
       blockConfirmations: 6,
     },
     mumbai: {
-      url: "https://polygon-mumbai-bor.publicnode.com	",
+      url: "https://polygon-mumbai-bor.publicnode.com",
       accounts: [PRIVATE_KEY],
       chainId: 80001,
       blockConfirmations: 6,
     },
-    scroll: {
+    scrollSepolia: {
       url: "https://sepolia-rpc.scroll.io/",
       chainId: 534351,
       accounts: [PRIVATE_KEY],
@@ -32,7 +32,7 @@ module.exports = {
       blockConfirmations: 6,
 
     },
-    arbitrum: {
+    arbitrumGoerli: {
       chainId: 421613,
       url: "https://arbitrum-goerli.public.blastapi.io",
       accounts: [PRIVATE_KEY],

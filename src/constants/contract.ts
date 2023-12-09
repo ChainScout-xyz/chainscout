@@ -1,15 +1,11 @@
-export const addressConfig = {
-    80001: "0x62D88D0D6463935A0a3a1D1129C391f165cEaef1",
-    534351: "0x6C4861469388027b8938509AebC585E0745cFA5E",
-    84531: "0x0d19114686984c09d1383d8cb54ecB9754B5eAeA",
-    421613: "0xD0bdc2395A6e26fe53Aa0b4586D09d2659832CBD"
-}
+export const allChainAddress = "0x6E0e556896E220190f1AA2b5Eea2e25F2406a5f0"
 
 export const rpcConfig = {
     80001: "https://polygon-mumbai-bor.publicnode.com",
     534351: "https://sepolia-rpc.scroll.io/",
     84531: "https://base-goerli.public.blastapi.io",
-    421613: "https://arbitrum-goerli.public.blastapi.io"
+    421613: "https://arbitrum-goerli.public.blastapi.io",
+    11155111: "https://rpc.sepolia.org"
 }
 
 export const abi = [
