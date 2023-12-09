@@ -1,40 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Analyze onchain transactions to find your target audience, create ad campaigns, and reward them for their interaction.
 
-## Getting Started
+🌏 website : https://chainscout.xyz/
 
-First, run the development server:
+# Motivations
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Chain Scout presents a solution for dApp developers facing difficulties in identifying and engaging their ideal Web3 audience. The platform utilizes on-chain transaction analysis to create targeted advertising strategies. This approach allows Web3 projects to precisely connect with users likely to be interested in their products. By offering a more effective and efficient way of audience targeting, the platform aims to enhance user interaction and engagement for Web3 products, addressing a critical gap in the market. This targeted approach is especially valuable in the rapidly evolving Web3 ecosystem, where user engagement is key to success.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Solution
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**1. Select onchain actions to analyze**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This could be something as simple as DAI transfer or Swap on Uniswap.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+We can find users/wallets who have had the onchain action
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**2. Filter the analyzed data**
 
-## Learn More
+You can filter those addresses by checking if they have ENS, Lens etc…
 
-To learn more about Next.js, take a look at the following resources:
+**3. Create a campaign**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Select how you want to reach your target and set up the incentive
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**4. Reward your users**
 
-## Deploy on Vercel
+Users can claim the reward once they complete the onchain action
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Deck
