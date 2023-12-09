@@ -11,7 +11,7 @@ export const calculatePercentage = (array1: string[], array2: string[]) => {
     console.log("percentage")
     console.log(percentage)
 
-    return percentage;
+    return percentage.toFixed(4);
 };
 
 

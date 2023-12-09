@@ -112,7 +112,7 @@ const ClaimPage = ({ node }: any) => {
         }
     }
 
-
+    console.log(provider)
 
     return (
         <>

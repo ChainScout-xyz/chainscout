@@ -56,6 +56,11 @@ query GetLast10DaiTokenTransfers {
     address: "0x568b9bFfF4a3a7C7351db84EC2F4Ad4CA147A1D0"
   });
 
+  addressesFound.push({
+    amount: "2500000000000000000000000",
+    address: "0x3447d0a8e80f7C1fFeAdb3E5Ec0e18e25cfE332B"
+  });
+
 
   res.status(200).json({
     filtered_address: addressesFound,
