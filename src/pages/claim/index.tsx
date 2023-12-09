@@ -42,6 +42,7 @@ const ClaimPage = ({ node }: any) => {
             const response = await fetch('/api/integration/gas');
             const data = await response.json();
             setGas(data);
+            console.log(gas)
         })();
     }, [anonAadhaar]);
 
@@ -81,6 +82,8 @@ const ClaimPage = ({ node }: any) => {
 
             setAllowedStatus(data.success);
             setLoading(false);
+            console.log(gas.data.estimatedBaseFee)
+
         } catch (e) {
             console.log(e);
         }
@@ -166,6 +169,7 @@ const ClaimPage = ({ node }: any) => {
                                                         <MagicWandIcon className="mr-2" />
                                                         {loading ? 'Loading...' : 'Verify'}
                                                     </Button>
+                                                    <p>You've saved ${gas.data.high.suggestedMaxFeePerGas * 2358.54 / 10000} in Gas Fees</p>
                                                 </div>
 
                                             </div>
