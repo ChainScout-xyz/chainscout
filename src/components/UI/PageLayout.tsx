@@ -10,7 +10,7 @@ const PageLayout = ({ title }: { title?: string }) => {
             </title>
 
 
-            <div className="mb-10 grid place-items-center">
+            <div className="pt-10 mb-10 grid place-items-center">
                 <Link href="/" passHref>
                     <img src="/chainscout.svg" alt="" />
                 </Link>

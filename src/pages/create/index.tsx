@@ -105,8 +105,8 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
   }
 
 
-  console.log("account")
-  console.log(account)
+  console.log("walletAddressToFilter")
+  console.log(walletAddressToFilter)
 
   return (
     <ContainerWrapper>
@@ -194,6 +194,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                 </label>
                 <div className='w-full grid grid-cols-2 gap-5'>
                   <FilterCampaign
+                    label="Lens"
                     message={'of users with this action have Lens Profile'}
                     api_path='lens_profile'
                     walletAddressToFilter={walletAddressToFilter}
@@ -202,6 +203,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     }
                   />
                   <FilterCampaign
+                    label='ENS'
                     message={'of users with this action have ENS'}
                     api_path='ens_filter'
                     walletAddressToFilter={walletAddressToFilter}
@@ -210,8 +212,9 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     }
                   />
                   <FilterCampaign
-                    message={'of users with this action have more than 2 ENS'}
-                    api_path='nft_addresses'
+                    label="Farcaster"
+                    message={'of users with this action have Farcaster Account'}
+                    api_path='farcaster'
                     walletAddressToFilter={walletAddressToFilter}
                     onApplyFilter={(address: string[]) =>
                       setFilteredResults(address)

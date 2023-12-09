@@ -42,8 +42,8 @@ export default function Home() {
       <main className={` min-h-screen`}>
         <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
 
-        <div className='bg-[#272727] rounded-2xl p-3 pl-28'>
-          <div className='mx-auto max-w-5xl grid grid-cols-3 gap-5 m-10 pt-7 pb-8 place-items-center mb-[80px]'>
+        <div className='bg-[#272727] rounded-2xl p-3 pl-20'>
+          <div className='mx-auto max-w-6xl grid grid-cols-4 gap-5 pt-7 pb-8 place-items-center mb-[80px]'>
             <FeatureCard
               icon={<CardStackIcon className='w-10 h-10 mb-2' />}
               title='Select on-chain action to analyze'
