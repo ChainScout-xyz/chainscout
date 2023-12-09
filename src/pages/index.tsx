@@ -4,6 +4,7 @@ import PageLayout from '@/components/UI/PageLayout';
 import { CardStackIcon, RocketIcon, TargetIcon } from '@radix-ui/react-icons';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,6 +29,11 @@ const FeatureCard = ({
 export default function Home() {
   const router = useRouter();
 
+  // useEffect(() => {
+  //   (async function handler() {
+  //     const response = await fetch('/api/integration/dai_transfers');
+  //   })();
+  // }, []);
 
   return (
     <main className={` min-h-screen`}>
@@ -71,9 +77,11 @@ export default function Home() {
         </div>
 
         <div className='grid place-items-center'>
-          <Button onClick={() => {
-            router.push('/create')
-          }}>
+          <Button
+            onClick={() => {
+              router.push('/create');
+            }}
+          >
             Next{' '}
             <svg
               xmlns='http://www.w3.org/2000/svg'
