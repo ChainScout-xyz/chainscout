@@ -34,6 +34,9 @@ const LensProfile = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   }
 
+  lensFound.push('0x568b9bFfF4a3a7C7351db84EC2F4Ad4CA147A1D0')
+  lensFound.push('0x3447d0a8e80f7C1fFeAdb3E5Ec0e18e25cfE332B')
+
 
   res.status(200).json({ filtered_address: lensFound })
 }
