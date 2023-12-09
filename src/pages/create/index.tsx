@@ -2,11 +2,14 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import PageLayout from '@/components/UI/PageLayout';
 import FilterCampaign from '@/components/shared/FilterCampaign';
-import { Select } from '@radix-ui/themes';
+import { Flex, Select, Switch, Text } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 
 const Create = () => {
   const [message, setMessage] = useState<string>('');
+  const [rewardPerWallet, setRewardPerWallet] = useState<string>('');
+  const [capacity, setCapacity] = useState<string>('');
+
   const [dataLoading, setDataLoading] = useState<boolean>(false);
   const [apiResponse, setApiResponse] = useState<any>(null);
   const [walletAddressToFilter, setWalletAddressToFilter] = useState<string[]>(
@@ -159,6 +162,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     }
                   />
                 </div>
+
                 <p className='font-semibold text-sm mt-2 text-black'>
                   Total Audience: {filteredResults.length ?? 0}
                 </p>
@@ -194,7 +198,6 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                       Push Protocol
                     </div>
                     <div className='p-3 border rounded-lg mr-2'>XMTP</div>
-                    <div className='p-3 border rounded-lg'>WAKU</div>
                   </div>
                 </div>
                 <div className='pt-4'>
@@ -213,6 +216,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     />
                   </div>
                 </div>
+
+
+
+
                 <div className='pt-4'>
                   <label
                     htmlFor=''
@@ -243,6 +250,8 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                   <div className='w-full'>
                     <input
                       type='text'
+                      value={rewardPerWallet}
+                      onChange={(e) => setRewardPerWallet(e.target.value)}
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
                       required
                     />
@@ -276,13 +285,25 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                   <div className='w-full'>
                     <input
                       type='text'
+                      value={capacity}
+                      onChange={(e) => setCapacity(e.target.value)}
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
                       required
                     />
                   </div>
-                  <p className='font-semibold text-sm mt-2 text-black'>
-                    Total Reward spent : 0 MATIC{' '}
-                  </p>
+                  {capacity && rewardPerWallet ? <>
+                    <p className='font-semibold text-sm mt-2 text-black'>
+                      Total Reward spent : {Number(capacity ?? 0) * Number(rewardPerWallet ?? 0)} MATIC{' '}
+                    </p>
+                  </> : null}
+                </div>
+
+                <div className="mt-5">
+                  <Text as="label" size="2" className='mt-5'>
+                    <Flex gap="2">
+                      <Switch defaultChecked /> Enable Adhar Verification
+                    </Flex>
+                  </Text>
                 </div>
               </div>
               <div className='mt-10 w-full flex justify-between items-center'>
