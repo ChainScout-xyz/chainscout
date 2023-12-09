@@ -9,7 +9,7 @@ const AdvancedFilter = () => {
                 <Dialog.Trigger>
                     <div className="cursor-pointer hover:text-gray-900 text-center py-1 text-sm flex items-center justify-center bg-white border rounded-b-lg top-[-10px] relative">
                         <DoubleArrowDownIcon className="w-3 h-3 mr-2" />
-                        Filter
+                        Advanced Filter
                     </div>
                 </Dialog.Trigger>
 

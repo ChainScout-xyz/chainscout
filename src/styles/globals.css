@@ -27,3 +27,17 @@ body {
 .select_input {
   width: 386px !important;
 }
+
+.filter_card:hover .green_face {
+  fill: #9eeb24 !important;
+  opacity: 1 !important;
+}
+
+.gray_scale {
+  filter: grayscale(100%);
+}
+
+
+.filter_card:hover .gray_scale {
+  filter: unset !important;
+}
