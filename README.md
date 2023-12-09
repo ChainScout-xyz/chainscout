@@ -1,3 +1,4 @@
+![Frame 1000002754](https://github.com/ChainScout-xyz/chainscout/assets/90386676/fdb38fac-7332-4107-94f5-3b5c0db058b0)
 
 Analyze onchain transactions to find your target audience, create ad campaigns, and reward them for their interaction.
 
