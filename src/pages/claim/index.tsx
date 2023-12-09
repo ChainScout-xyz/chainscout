@@ -10,6 +10,7 @@ import { MagicWandIcon } from '@radix-ui/react-icons';
 import { LogInWithAnonAadhaar, useAnonAadhaar } from 'anon-aadhaar-react';
 import { useEffect, useState } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
+import { toast } from 'sonner';
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
 
@@ -32,6 +33,9 @@ const ClaimPage = ({ node }: Props) => {
   const [gas, setGas] = useState(null);
 
   useEffect(() => {
+    toast.error(
+      'You have not completed the required actions to claim the reward.'
+    );
     console.log('Anon Aadhaar status: ', anonAadhaar.status);
     (async function call() {
       const response = await fetch('/api/integration/gas');
@@ -51,6 +55,8 @@ const ClaimPage = ({ node }: Props) => {
 
   const verifyUserAction = async () => {
     setLoading(true);
+    toast('Hodl! It will take sometime to verify the task!');
+
     try {
       const response = await fetch('/api/integration/1inch_filter', {
         method: 'POST',
@@ -64,12 +70,39 @@ const ClaimPage = ({ node }: Props) => {
 
       const data = await response.json();
 
-      if (data.status === false) {
-        console.log('not verified');
+      console.log(data);
+
+      if (data.success == false) {
+        toast.error(
+          'You have not completed the required actions to claim the reward.'
+        );
       }
 
-      setAllowedStatus(data.status);
+      setAllowedStatus(data.success);
       setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const claimReward = async () => {
+    setLoading(true);
+    toast('Hodl! It will take sometime to verify the task!');
+
+    try {
+      const response = await fetch('/api/integration/claim_reward', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          wallet_address: account,
+        }),
+      });
+
+      const data = await response.json();
+
+      toast('Reward Claimed.');
     } catch (e) {
       console.log(e);
     }
@@ -110,7 +143,7 @@ const ClaimPage = ({ node }: Props) => {
                           }}
                         >
                           <MagicWandIcon className='mr-2' />
-                          Verify
+                          {loading ? 'Loading...' : 'Verify'}
                         </Button>
                       </>
                     ) : (
@@ -125,18 +158,23 @@ const ClaimPage = ({ node }: Props) => {
                         </p>
                         <p>You have earned 0.1 ETH.</p>
 
-                        <LogInWithAnonAadhaar />
+                        {/* <LogInWithAnonAadhaar />
 
-                        <p>{anonAadhaar?.status}</p>
-
-                        <Button
-                          onClick={() => {
-                            setRewardClaimed(true);
-                          }}
-                        >
-                          <MagicWandIcon className='mr-2' />
-                          Claim
-                        </Button>
+                                        <p>{anonAadhaar?.status}</p> */}
+                        {rewardClaimed ? (
+                          <>
+                            <p>Congrats! You have claimed the reward!!!</p>
+                          </>
+                        ) : (
+                          <Button
+                            onClick={() => {
+                              setRewardClaimed(true);
+                            }}
+                          >
+                            <MagicWandIcon className='mr-2' />
+                            Claim
+                          </Button>
+                        )}
                       </>
                     )}
                   </>
