@@ -5,23 +5,25 @@ import FilterCampaign from '@/components/shared/FilterCampaign';
 import { Select } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 
-
 const Create = () => {
-  const [dataLoading, setDataLoading] = useState<boolean>(false)
+  const [dataLoading, setDataLoading] = useState<boolean>(false);
   const [apiResponse, setApiResponse] = useState<any>(null);
-  const [walletAddressToFilter, setWalletAddressToFilter] = useState<string[]>([])
+  const [walletAddressToFilter, setWalletAddressToFilter] = useState<string[]>(
+    []
+  );
   const [filteredResults, setFilteredResults] = useState<string[]>([]);
-
 
   useEffect(() => {
     (async function handler() {
-      setDataLoading(true)
+      setDataLoading(true);
       const response = await fetch('/api/integration/dai_transfers');
-      const data = await response.json()
+      const data = await response.json();
       setApiResponse(data.filtered_address);
-      const walletList = data.filtered_address?.map((item: any) => item.address);
-      setWalletAddressToFilter(walletList)
-      setDataLoading(false)
+      const walletList = data.filtered_address?.map(
+        (item: any) => item.address
+      );
+      setWalletAddressToFilter(walletList);
+      setDataLoading(false);
     })();
   }, []);
 
@@ -39,63 +41,100 @@ const Create = () => {
                   1. Select On-Chain Action to Analyze
                 </label>
                 <div className='w-full'>
-                  <Select.Root size={"3"} defaultValue="dai_transfer">
+                  <Select.Root size={'3'} defaultValue='dai_transfer'>
                     <Select.Trigger className='select_input' />
                     <Select.Content>
                       <Select.Group>
                         <Select.Label>Token</Select.Label>
-                        <Select.Item value="dai_transfer">DAI Transfer</Select.Item>
+                        <Select.Item value='dai_transfer'>
+                          DAI Transfer
+                        </Select.Item>
                       </Select.Group>
                       <Select.Separator />
                       <Select.Group>
                         <Select.Label>dApps</Select.Label>
-                        <Select.Item value="dapps">1inch</Select.Item>
+                        <Select.Item value='dapps'>1inch</Select.Item>
                       </Select.Group>
                     </Select.Content>
                   </Select.Root>
                 </div>
                 <p className='font-semibold text-sm mt-2 text-black'>
-                  Total users with this action: {walletAddressToFilter.length ?? 0}
+                  Total users with this action:{' '}
+                  {walletAddressToFilter.length ?? 0}
                 </p>
               </div>
-
-              <div className="bg-gray-50 rounded-lg mt-5 border">
-                {dataLoading ? <>
-                  <div className='flex justify-center items-center p-4 border-b border-gray-200 text-center'>
-                    <div className='flex items-center justify-center w-full'>
-                      <p className='text-sm font-medium mr-2 flex items-center text-center'>
-                        <img src="/loader.svg" alt="loader" className="w-6 h-6" />
-
-                        Loading...</p>
-                    </div>
-                  </div>
-                </> : <>
-
-                  {apiResponse?.map((item: any) => (<>
-                    <div className='flex justify-between items-center p-4 border-b border-gray-200'>
-
-                      <div className='flex items-center justify-between w-full'>
-                        <p className='text-sm font-medium mr-2'>{item.address}</p>
-                        <p className='text-sm font-medium flex items-center'>
-                          {(item.amount / 10 ** 18).toFixed(3)} DAI
-                          <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png" alt="" className='w-4 h-4 ml-1' />
+              <div className='bg-gray-50 rounded-lg mt-5 border'>
+                {dataLoading ? (
+                  <>
+                    <div className='flex justify-center items-center p-4 border-b border-gray-200 text-center'>
+                      <div className='flex items-center justify-center w-full'>
+                        <p className='text-sm font-medium mr-2 flex items-center text-center'>
+                          <img
+                            src='/loader.svg'
+                            alt='loader'
+                            className='w-6 h-6'
+                          />
+                          Loading...
                         </p>
                       </div>
                     </div>
-                  </>))}
-                  <div className='text-center py-1 text-sm'>
-                    {walletAddressToFilter.length ?? 50} More records
-                  </div>
-                </>}
+                  </>
+                ) : (
+                  <>
+                    {apiResponse?.map((item: any) => (
+                      <>
+                        <div className='flex justify-between items-center p-4 border-b border-gray-200'>
+                          <div className='flex items-center justify-between w-full'>
+                            <p className='text-sm font-medium mr-2'>
+                              {item.address}
+                            </p>
+                            <p className='text-sm font-medium flex items-center'>
+                              {(item.amount / 10 ** 18).toFixed(3)} DAI
+                              <img
+                                src='https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png'
+                                alt=''
+                                className='w-4 h-4 ml-1'
+                              />
+                            </p>
+                          </div>
+                        </div>
+                      </>
+                    ))}
+                    <div className='text-center py-1 text-sm'>
+                      {walletAddressToFilter.length ?? 50} More records
+                    </div>
+                  </>
+                )}
               </div>
               <div className='pt-7'>
                 <label htmlFor='' className='mb-2 block text-black font-bold'>
                   2. Select Targets
                 </label>
                 <div className='w-full grid grid-cols-2 gap-5'>
-                  <FilterCampaign message={'of users with this action have ENS Profile'} api_path='' walletAddressToFilter={walletAddressToFilter} onApplyFilter={(address: string[]) => setFilteredResults(address)} />
-                  <FilterCampaign message={'of users with this action have lens profile'} api_path='' walletAddressToFilter={walletAddressToFilter} onApplyFilter={(address: string[]) => setFilteredResults(address)} />
-                  <FilterCampaign message={'of users with this action have more than 2 ENS'} api_path='' walletAddressToFilter={walletAddressToFilter} onApplyFilter={(address: string[]) => setFilteredResults(address)} />
+                  <FilterCampaign
+                    message={'of users with this action have ENS Profile'}
+                    api_path=''
+                    walletAddressToFilter={walletAddressToFilter}
+                    onApplyFilter={(address: string[]) =>
+                      setFilteredResults(address)
+                    }
+                  />
+                  <FilterCampaign
+                    message={'of users with this action have lens profile'}
+                    api_path=''
+                    walletAddressToFilter={walletAddressToFilter}
+                    onApplyFilter={(address: string[]) =>
+                      setFilteredResults(address)
+                    }
+                  />
+                  <FilterCampaign
+                    message={'of users with this action have more than 2 ENS'}
+                    api_path=''
+                    walletAddressToFilter={walletAddressToFilter}
+                    onApplyFilter={(address: string[]) =>
+                      setFilteredResults(address)
+                    }
+                  />
                 </div>
                 <p className='font-semibold text-sm mt-2 text-black'>
                   Total Audience: {filteredResults.length ?? 0}
@@ -157,19 +196,16 @@ const Create = () => {
                     Network{' '}
                   </label>
                   <div className='w-52'>
-
-                    <Select.Root size={"3"} defaultValue="polygon">
+                    <Select.Root size={'3'} defaultValue='polygon'>
                       <Select.Trigger className='select_input' />
                       <Select.Content>
                         <Select.Group>
-                          <Select.Item value="polygon">Polygon</Select.Item>
-                          <Select.Item value="celo">Celo</Select.Item>
-                          <Select.Item value="xdc">xDC</Select.Item>
+                          <Select.Item value='polygon'>Polygon</Select.Item>
+                          <Select.Item value='celo'>Celo</Select.Item>
+                          <Select.Item value='xdc'>xDC</Select.Item>
                         </Select.Group>
                       </Select.Content>
                     </Select.Root>
-
-
                   </div>
                 </div>
                 <div className='pt-4'>
@@ -195,16 +231,14 @@ const Create = () => {
                     Currency{' '}
                   </label>
                   <div className='w-full'>
-                    <Select.Root size={"3"} defaultValue="matic">
+                    <Select.Root size={'3'} defaultValue='matic'>
                       <Select.Trigger className='select_input' />
                       <Select.Content>
                         <Select.Group>
-                          <Select.Item value="matic">Matic</Select.Item>
+                          <Select.Item value='matic'>Matic</Select.Item>
                         </Select.Group>
                       </Select.Content>
                     </Select.Root>
-
-
                   </div>
                 </div>
                 <div className='pt-4'>
