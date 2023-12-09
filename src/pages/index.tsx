@@ -29,6 +29,9 @@ const FeatureCard = ({
 export default function Home() {
   const router = useRouter();
 
+  // (async function handler() {
+  //   const response = await fetch('/api/integration/huddle');
+  // })();
 
   return (
     <main className={` min-h-screen`}>
