@@ -26,6 +26,7 @@ const PageLayout = dynamic(
 )
 
 const ClaimPage = ({ node }: any) => {
+    const [claimResponse, setClaimResponse] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const [allowed, setAllowedStatus] = useState(false);
     const [rewardClaimed, setRewardClaimed] = useState(false);
@@ -72,6 +73,7 @@ const ClaimPage = ({ node }: any) => {
 
             const data = await response.json();
 
+            setClaimResponse(data);
             console.log(data);
 
             if (data.success == false) {
@@ -169,7 +171,6 @@ const ClaimPage = ({ node }: any) => {
                                                         <MagicWandIcon className="mr-2" />
                                                         {loading ? 'Loading...' : 'Verify'}
                                                     </Button>
-                                                    <p>You've saved ${gas.data.high.suggestedMaxFeePerGas * 2358.54 / 10000} in Gas Fees</p>
                                                 </div>
 
                                             </div>
@@ -189,6 +190,9 @@ const ClaimPage = ({ node }: any) => {
                                         <p>
                                             You have earned 0.1 ETH.
                                         </p>
+                                        {/* @ts-ignore */}
+                                        <p>⛽ You{`'`}ve saved ${gas?.data?.high.suggestedMaxFeePerGas * 2358.54 / 10000} in Gas Fees</p>
+
 
 
                                         {/* <LogInWithAnonAadhaar />
@@ -196,6 +200,14 @@ const ClaimPage = ({ node }: any) => {
                                         <p>{anonAadhaar?.status}</p> */}
                                         {rewardClaimed ? <>
                                             <p>Congrats! You have claimed the reward!!!</p>
+
+                                            {claimResponse ?
+                                                <p>
+                                                    {claimResponse?.response ? <>
+                                                        TxHash: {claimResponse?.response}
+                                                    </> : null}
+                                                </p>
+                                                : null}
 
                                         </> :
                                             <Button onClick={async () => {

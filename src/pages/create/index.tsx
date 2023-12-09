@@ -10,6 +10,7 @@ import Constants from '@pushprotocol/restapi/src/lib/constants';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
 import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 
@@ -20,7 +21,8 @@ const PageLayout = dynamic(
 )
 
 const Create = () => {
-
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const [campaignName, setCampaignName] = useState('');
   const [message, setMessage] = useState<string>('');
   const [rewardPerWallet, setRewardPerWallet] = useState<string>('');
@@ -45,8 +47,15 @@ const Create = () => {
 
 
   const run = async () => {
+    setLoading(true);
     try {
-      await sendXMTPMessage();
+      if (mesageProvider == "push") {
+        await sendPushNotification();
+      }
+      else {
+        await sendXMTPMessage();
+      }
+
       const chainId = 11155111
       const provider = new ethers.providers.Web3Provider((window as any).ethereum, 'any');
       const signer = await provider.getSigner();
@@ -67,10 +76,13 @@ const Create = () => {
         }
       )
       console.log(create)
+
+      router.push('/dashboard/1')
     }
     catch (err) {
       console.error(err)
     }
+    setLoading(false);
   }
 
 
@@ -99,10 +111,11 @@ const Create = () => {
         body: JSON.stringify({
           wallet_address: [
             '0xCbE80A330F5221ac28392933BdeE65f1F2dAb834',
-            '0x568b9bFfF4a3a7C7351db84EC2F4Ad4CA147A1D0'
+            '0x568b9bFfF4a3a7C7351db84EC2F4Ad4CA147A1D0',
+            '0xf1996154C34e3dc77b26437a102231785e9aD7fE'
           ],
           message: `${message} 
-Claim Reward: ${'https://chainscout.xyz/claim'}`,
+Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`,
         }),
       });
     }
@@ -125,13 +138,16 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
     const userAlice = await PushAPI.initialize(signer as any, { env: Constants.ENV.STAGING });
 
     // Send a notification to users of your protocol
-    const apiResponse = await userAlice.channel.send(['0xFf8C547027A357b94c25e1754dD21f0c7f68FD14'], {
+    const apiResponse = await userAlice.channel.send(['0xe1435247B7373dAC9027c4bd3E135e122e6AEB9a'], {
+      channel: 'eip155:11155111:0xdfcef1F63e09642A21bD464Ec1174edD68D326D5',
       notification: {
-        title: 'Hello World Notification',
-        body: 'Web3 native notifications are here!',
+        title: 'Hey! You are eligible for a reward!',
+        body: `${message} 
+Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`,
       }
     });
 
+    console.log("apiResponse")
     console.log(apiResponse)
 
   }
@@ -276,6 +292,27 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
 
 
                 </div>
+
+                <div className='pt-4'>
+                  <label
+                    htmlFor=''
+                    className='mb-2 block text-black font-medium'
+                  >
+
+                    Verification Method
+                  </label>
+                  <div className='w-full'>
+                    <Select.Root size={'3'} defaultValue='1inch_verification'>
+                      <Select.Trigger className='select_input' />
+                      <Select.Content>
+                        <Select.Group>
+                          <Select.Item value='1inch_verification'>1inch Swap Verification</Select.Item>
+                        </Select.Group>
+                      </Select.Content>
+                    </Select.Root>
+                  </div>
+                </div>
+
                 <div className='pt-4'>
                   <label
                     htmlFor=''
@@ -322,6 +359,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                           <Select.Item value='polygon'>Polygon</Select.Item>
                           <Select.Item value='celo'>Celo</Select.Item>
                           <Select.Item value='xdc'>xDC</Select.Item>
+                          <Select.Item value='arb'>Arbitrum</Select.Item>
+                          <Select.Item value='zkevm'>Polygon zkevm</Select.Item>
+                          <Select.Item value='mantle'>Mantle</Select.Item>
+                          <Select.Item value='scroll'>Scroll</Select.Item>
                         </Select.Group>
                       </Select.Content>
                     </Select.Root>
@@ -362,25 +403,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                   </div>
                 </div>
 
-                <div className='pt-4'>
-                  <label
-                    htmlFor=''
-                    className='mb-2 block text-black font-medium'
-                  >
 
-                    Verification Method
-                  </label>
-                  <div className='w-full'>
-                    <Select.Root size={'3'} defaultValue='1inch_verification'>
-                      <Select.Trigger className='select_input' />
-                      <Select.Content>
-                        <Select.Group>
-                          <Select.Item value='1inch_verification'>1inch Swap Verification</Select.Item>
-                        </Select.Group>
-                      </Select.Content>
-                    </Select.Root>
-                  </div>
-                </div>
                 <div className='pt-4'>
                   <label
                     htmlFor=''
@@ -412,11 +435,9 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                 </div>
               </div>
 
-              <button onClick={sendPushNotification}>
-                test push
-              </button>
+
               <div className='mt-10 w-full flex justify-between items-center'>
-                {account ? <Button onClick={run}>Run</Button> : <>
+                {account ? <Button onClick={run}>{loading ? "Loading..." : "Run"}</Button> : <>
                   <Button onClick={connect}>Connect</Button>
                 </>}
 

@@ -31,6 +31,7 @@ const ClaimReward = async (req: NextApiRequest, res: NextApiResponse) => {
         })
 
     } catch (error) {
+        console.log(error);
 
         return res.json({
             success: false
