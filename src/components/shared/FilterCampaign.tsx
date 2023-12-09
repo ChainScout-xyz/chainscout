@@ -92,7 +92,7 @@ const FilterCampaign = ({
                         style={{
                             position: "absolute",
                         }}
-                        src="https://cryptologos.cc/logos/ethereum-name-service-ens-logo.svg?v=029" className="w-14 absolute bottom-[10px] h-14 relative right-0 gray_scale" />
+                        src="ens.svg" className="w-14 absolute bottom-[10px] h-14 relative right-0 gray_scale" />
                     : null}
 
                 {api_path === "farcaster" ?
@@ -100,7 +100,7 @@ const FilterCampaign = ({
                         style={{
                             position: "absolute",
                         }}
-                        src="https://raw.githubusercontent.com/vrypan/farcaster-brand/main/icons/icon-transparent/transparent-purple.png" className="w-14 absolute bottom-[20px] h-14 relative right-0 gray_scale" />
+                        src="farcaster.png" className="w-14 absolute bottom-[20px] h-14 relative right-0 gray_scale" />
                     : null}
             </div>
             <AdvancedFilter />
