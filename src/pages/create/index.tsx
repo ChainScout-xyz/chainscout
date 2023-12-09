@@ -34,6 +34,16 @@ const Create = () => {
       console.warn(`failed to connect..`, err);
     }
   };
+  const disconnect = async () => {
+    try {
+      await sdk?.disconnect();
+      // setAccount((accounts as any)?.[0]);
+      console.log('disconnected')
+    } catch(err) {
+      console.warn(`failed to connect..`, err);
+    }
+  };
+  
 
   // complete this function
   const run = async () => {
@@ -326,7 +336,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
               </div>
               <div className='mt-10 w-full flex justify-between items-center'>
                 {connected ? <Button onClick={run}>Run</Button> : <Button onClick={connect}>Connect</Button>}
-                
+                <Button onClick={disconnect}>Disconnect</Button>
               </div>{' '}
             </form>
           </div>
