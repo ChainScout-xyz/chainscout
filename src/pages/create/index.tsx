@@ -43,27 +43,35 @@ const Create = () => {
 
 
   const run = async () => {
-    const chainId = 80001
-    // console.log(provider)
-    const _provider = new ethers.providers.JsonRpcProvider(rpcConfig[chainId])
-    const wallet = new ethers.Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY!, _provider)
-    console.log(wallet.address)
-    const contract = new ethers.Contract(addressConfig[chainId], abi, wallet)
-    const create = await contract.createAirdrop(
-      campaignName,
-      // number of people who can get
-      capacity,
-      // total amount of tokens
-      Number(capacity) * Number(rewardPerWallet),
-      // anonaadhar?
-      true,
-      // verification
-      "1inch_verification",
-      {
-        value: ethers.utils.parseEther("10")
-      }
-    )
-    console.log(create)
+
+    await sendXMTPMessage()
+
+    try {
+      const chainId = 80001
+      // console.log(provider)
+      const _provider = new ethers.providers.JsonRpcProvider(rpcConfig[chainId])
+      const wallet = new ethers.Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY!, _provider)
+      console.log(wallet.address)
+      const contract = new ethers.Contract(addressConfig[chainId], abi, wallet)
+      const create = await contract.createAirdrop(
+        campaignName,
+        // number of people who can get
+        capacity,
+        // total amount of tokens
+        Number(capacity) * Number(rewardPerWallet),
+        // anonaadhar?
+        true,
+        // verification
+        "1inch_verification",
+        {
+          value: ethers.utils.parseEther("10")
+        }
+      )
+      console.log(create)
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
 
 
