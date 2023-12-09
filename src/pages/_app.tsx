@@ -2,41 +2,58 @@ import '@/styles/globals.css';
 import { MetaMaskProvider } from '@metamask/sdk-react';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
-import { AnonAadhaarProvider } from "anon-aadhaar-react";
+import { AnonAadhaarProvider } from 'anon-aadhaar-react';
 import type { AppProps } from 'next/app';
+import { MetaMaskProvider } from '@metamask/sdk-react';
+import { useEffect, useState } from 'react';
+import { LightNode } from '@waku/sdk';
+import { createNode } from '@/utils/waku';
 import { Toaster } from 'sonner';
 
-
-const app_id = process.env.NEXT_PUBLIC_APP_ID || "";
+const app_id = process.env.NEXT_PUBLIC_APP_ID || '';
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Theme
-    // appearance='dark'
-    accentColor="gold"
-    grayColor="gray"
-    panelBackground="solid"
-    scaling="100%"
+  const [wakuNode, setWakuNode] = useState<LightNode | null>(null);
+  useEffect(() => {
+    if (wakuNode) return;
+    (async () => {
+      console.log('starting node');
+      const node = await createNode();
+      console.log('node started');
+      setWakuNode(node);
+    })();
+  }, [wakuNode]);
 
-  >
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='' />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500&display=swap" rel="stylesheet" />
-
-    <div className="bg-[#faf8f3] text-[#646464]">
-      <MetaMaskProvider debug={false} sdkOptions={{
-        checkInstallationImmediately: true,
-        dappMetadata: {
-          name: "chainScout",
-          // url: window.location.host,
-        }
-      }}>
-        <AnonAadhaarProvider _appId={app_id}>
-          <Component {...pageProps} />
-        </AnonAadhaarProvider>
-      </MetaMaskProvider>
-      <Toaster
-        position="top-center"
-      />
-    </div>
-  </Theme>
+  return (
+    <Theme
+      // appearance='dark'
+      accentColor='gold'
+      grayColor='gray'
+      panelBackground='solid'
+      scaling='100%'
+    >
+      <div className='bg-[#faf8f3] text-[#646464]'>
+        <div className='mx-auto max-w-screen-xl px-1 md:px-4 sm:px-6 relative'>
+          <MetaMaskProvider
+            debug={false}
+            sdkOptions={{
+              checkInstallationImmediately: true,
+              dappMetadata: {
+                name: 'chainScout',
+                // url: window.location.host,
+              },
+            }}
+          >
+            <AnonAadhaarProvider _appId={app_id}>
+              {wakuNode ? (
+                <Component {...pageProps} node={wakuNode} />
+              ) : (
+                'Loading...'
+              )}
+            </AnonAadhaarProvider>
+          </MetaMaskProvider>
+        </div>
+      </div>
+    </Theme>
+  );
 }

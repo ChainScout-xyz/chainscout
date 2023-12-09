@@ -1,19 +1,23 @@
 import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
-import { CardStackIcon, KeyboardIcon, RocketIcon, TargetIcon } from '@radix-ui/react-icons';
+import {
+  CardStackIcon,
+  KeyboardIcon,
+  RocketIcon,
+  TargetIcon,
+} from '@radix-ui/react-icons';
 import { Select } from '@radix-ui/themes';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const PageLayout = dynamic(
-  () => import('@/components/UI/PageLayout'), {
-  ssr: false
-}
-)
+const PageLayout = dynamic(() => import('@/components/UI/PageLayout'), {
+  ssr: false,
+});
 
 const FeatureCard = ({
   title,
@@ -38,7 +42,6 @@ export default function Home() {
 
   return (
     <ContainerWrapper>
-
       <main className={` min-h-screen`}>
         <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
 
@@ -120,6 +123,5 @@ export default function Home() {
         </CardWrapper>
       </main>
     </ContainerWrapper>
-
   );
 }
