@@ -1,5 +1,4 @@
-![Frame 1000002754](https://github.com/ChainScout-xyz/chainscout/assets/90386676/fdb38fac-7332-4107-94f5-3b5c0db058b0)
-<img width="1200" alt="Screenshot 2023-12-09 at 22 52 1" src="https://github.com/ChainScout-xyz/chainscout/assets/90386676/fdca9744-319d-4d07-91d1-be7c7e378e52">
+<img width="1371" alt="Screenshot 2023-12-09 at 22 52 57" src="https://github.com/ChainScout-xyz/chainscout/assets/90386676/61138ae3-048e-40dc-a794-88a70593577e">
 
 Analyze onchain transactions to find your target audience, create ad campaigns, and reward them for their interaction.
 
@@ -35,7 +34,6 @@ Select how you want to reach your target and set up the incentive
 Users can claim the reward once they complete the onchain action
 
 # Deck
-<img width="1371" alt="Screenshot 2023-12-09 at 22 52 57" src="https://github.com/ChainScout-xyz/chainscout/assets/90386676/61138ae3-048e-40dc-a794-88a70593577e">
 <img width="1376" alt="Screenshot 2023-12-09 at 22 53 08" src="https://github.com/ChainScout-xyz/chainscout/assets/90386676/5b0ac663-de8e-42a5-9fe7-4d6c512f1b28">
 <img width="1377" alt="Screenshot 2023-12-09 at 22 53 18" src="https://github.com/ChainScout-xyz/chainscout/assets/90386676/e96451ab-a7fd-4938-922c-586e1278529f">
 <img width="1375" alt="Screenshot 2023-12-09 at 22 53 31" src="https://github.com/ChainScout-xyz/chainscout/assets/90386676/43d5ad71-a1da-462f-b15e-ac177bb4b26e">
