@@ -1,9 +1,11 @@
 import '@/styles/globals.css';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+import { AnonAadhaarProvider } from "anon-aadhaar-react";
 import type { AppProps } from 'next/app';
 
 
+const app_id = process.env.NEXT_PUBLIC_APP_ID || "";
 
 export default function App({ Component, pageProps }: AppProps) {
   return <Theme
@@ -20,7 +22,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
     <div className="bg-[#faf8f3] text-[#646464]">
       <div className="mx-auto max-w-screen-xl px-1 md:px-4 sm:px-6 relative">
-        <Component {...pageProps} />
+        <AnonAadhaarProvider _appId={app_id}>
+          <Component {...pageProps} />
+        </AnonAadhaarProvider>
       </div>
     </div>
   </Theme>

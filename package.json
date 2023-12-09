@@ -14,6 +14,7 @@
     "@radix-ui/themes": "^2.0.2",
     "@waku/react": "^0.0.5-63a782d",
     "@xmtp/xmtp-js": "^11.2.3",
+    "anon-aadhaar-react": "^0.1.14",
     "axios": "^1.6.2",
     "ethers": "^6.9.0",
     "next": "14.0.4",

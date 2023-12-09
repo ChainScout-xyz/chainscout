@@ -3,8 +3,17 @@ import CardWrapper from "@/components/UI/CardWrapper"
 import PageLayout from "@/components/UI/PageLayout"
 import RewardCard from "@/components/shared/RewardCard"
 import { MagicWandIcon } from "@radix-ui/react-icons"
+import { LogInWithAnonAadhaar, useAnonAadhaar } from "anon-aadhaar-react"
+import { useEffect } from "react"
 
 const ClaimPage = () => {
+    const [anonAadhaar] = useAnonAadhaar();
+
+    useEffect(() => {
+        console.log("Anon Aadhaar status: ", anonAadhaar.status);
+    }, [anonAadhaar]);
+
+
     return (
         <main
             className={` min-h-screen`}
@@ -18,6 +27,7 @@ const ClaimPage = () => {
                     <div className="space-y-5 w-1/2 grid place-items-center">
 
 
+
                         <h2 className='text-xl font-bold'>You got the reward 🎉</h2>
 
                         <p>
@@ -26,6 +36,9 @@ const ClaimPage = () => {
                         <p>
                             You have earned 0.1 ETH.
                         </p>
+
+                        <LogInWithAnonAadhaar />
+                        <p>{anonAadhaar?.status}</p>
 
                         <Button>
                             <MagicWandIcon className="mr-2" />
