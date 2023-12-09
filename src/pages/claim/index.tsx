@@ -48,11 +48,15 @@ const ClaimPage = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    wallet_address: '0xaD26A4E7ef85EDccD48451B64029B8082ffDeF18',
+                    wallet_address: account,
                 }),
             });
 
             const data = await response.json();
+
+            if (data.status === false) {
+                console.log("not verified")
+            }
 
             setAllowedStatus(data.status)
             setLoading(false);
@@ -86,41 +90,60 @@ const ClaimPage = () => {
                         <div className="grid place-items-center">
                             <div className="space-y-5 w-1/2 grid place-items-center">
 
-                                <h2 className='text-xl font-bold'>Verify your actions</h2>
+                                {account ? <>
 
-                                <p>
-                                    You have to verify your actions to claim the reward.
-                                </p>
+                                    {!allowed ? <>
 
-                                <Button
-                                    loading={loading}
-                                    onClick={async () => {
-                                        await verifyUserAction();
-                                    }}>
-                                    <MagicWandIcon className="mr-2" />
-                                    Verify
-                                </Button>
+                                        <h2 className='text-xl font-bold'>Verify your actions</h2>
+
+                                        <p>
+                                            You have to verify your actions to claim the reward.
+                                        </p>
+
+                                        <Button
+                                            loading={loading}
+                                            onClick={async () => {
+                                                await verifyUserAction();
+                                            }}>
+                                            <MagicWandIcon className="mr-2" />
+                                            Verify
+                                        </Button>
+
+                                    </> : <>
+
+                                        <h2 className='text-xl font-bold'>You got the reward 🎉</h2>
+
+                                        <p>
+                                            Thank you for participating in the 1 inch swap campaign.
+                                        </p>
+                                        <p>
+                                            You have earned 0.1 ETH.
+                                        </p>
 
 
-                                <h2 className='text-xl font-bold'>You got the reward 🎉</h2>
+                                        <LogInWithAnonAadhaar />
 
-                                <p>
-                                    Thank you for participating in the 1 inch swap campaign.
-                                </p>
-                                <p>
-                                    You have earned 0.1 ETH.
-                                </p>
+                                        <p>{anonAadhaar?.status}</p>
+
+                                        <Button onClick={() => {
+                                            setRewardClaimed(true);
+                                        }}>
+
+                                            <MagicWandIcon className="mr-2" />
+                                            Claim
+                                        </Button>
+                                    </>}
+
+                                </> : <>
+                                    <h2 className='text-xl font-bold'>Connect Your Wallet</h2>
+
+                                    <p>
+                                        Connect your account & verify to claim the reward!
+                                    </p>
+
+                                    <Button onClick={connect}>Connect</Button></>}
 
 
-                                <LogInWithAnonAadhaar />
-                                <p>{anonAadhaar?.status}</p>
-
-                                <Button onClick={() => {
-                                    setRewardClaimed(true);
-                                }}>
-                                    <MagicWandIcon className="mr-2" />
-                                    Claim
-                                </Button>
                             </div>
                         </div>
                     </CardWrapper>

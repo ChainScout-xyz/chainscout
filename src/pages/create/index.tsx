@@ -169,7 +169,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                 </label>
                 <div className='w-full grid grid-cols-2 gap-5'>
                   <FilterCampaign
-                    message={'of users with this action have ENS Profile'}
+                    message={'of users with this action have Lens Profile'}
                     api_path='lens_profile'
                     walletAddressToFilter={walletAddressToFilter}
                     onApplyFilter={(address: string[]) =>
@@ -177,7 +177,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     }
                   />
                   <FilterCampaign
-                    message={'of users with this action have lens profile'}
+                    message={'of users with this action have ENS'}
                     api_path='ens_filter'
                     walletAddressToFilter={walletAddressToFilter}
                     onApplyFilter={(address: string[]) =>
