@@ -2,14 +2,14 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
 import FilterCampaign from '@/components/shared/FilterCampaign';
+import { abi, addressConfig, rpcConfig } from '@/constants/contract';
 import useMetamask from '@/hooks/useMetamask';
 import { shortenAddress } from '@/utils';
+import { useSDK } from '@metamask/sdk-react';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
+import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import {ethers } from 'ethers'; 
-import { useSDK } from '@metamask/sdk-react';
-import { addressConfig, abi, rpcConfig } from '@/constants/contract';
 
 
 const PageLayout = dynamic(
@@ -19,6 +19,7 @@ const PageLayout = dynamic(
 )
 
 const Create = () => {
+  const [campaignName, setCampaignName] = useState('');
   const [message, setMessage] = useState<string>('');
   const [rewardPerWallet, setRewardPerWallet] = useState<string>('');
   const [capacity, setCapacity] = useState<string>('');
@@ -40,7 +41,7 @@ const Create = () => {
   const { sdk, connecting, provider } = useSDK();
 
 
-  // complete this function
+
   const run = async () => {
     const chainId = 80001
     // console.log(provider)
@@ -49,12 +50,11 @@ const Create = () => {
     console.log(wallet.address)
     const contract = new ethers.Contract(addressConfig[chainId], abi, wallet)
     const create = await contract.createAirdrop(
-      // name
-      "test",
+      campaignName,
       // number of people who can get
-      10,
+      capacity,
       // total amount of tokens
-      10,
+      Number(capacity) * Number(rewardPerWallet),
       // anonaadhar?
       true,
       // verification
@@ -235,7 +235,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     Campaign Name{' '}
                   </label>
 
-                  <TextField.Input size="3" placeholder="" />
+                  <TextField.Input size="3" placeholder=""
+                    value={campaignName}
+                    onChange={(e) => setCampaignName(e.target.value)}
+                  />
 
 
                 </div>
