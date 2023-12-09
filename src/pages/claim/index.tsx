@@ -17,7 +17,9 @@ const ClaimPage = () => {
                 <div className="grid place-items-center">
                     <div className="space-y-5 w-1/2 grid place-items-center">
 
+
                         <h2 className='text-xl font-bold'>You got the reward 🎉</h2>
+
                         <p>
                             Thank you for participating in the 1 inch swap campaign.
                         </p>

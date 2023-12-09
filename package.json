@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@airstack/node": "^0.0.5",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/themes": "^2.0.2",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "urql": "^4.0.6"
   },
   "devDependencies": {
     "@types/node": "^20",
