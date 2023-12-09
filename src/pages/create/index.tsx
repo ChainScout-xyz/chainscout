@@ -7,6 +7,9 @@ import { shortenAddress } from '@/utils';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import {ethers } from 'ethers'; 
+import { useSDK } from '@metamask/sdk-react';
+import { addressConfig, abi, rpcConfig } from '@/constants/contract';
 
 
 const PageLayout = dynamic(
@@ -32,13 +35,35 @@ const Create = () => {
     connect,
     disconnect,
     account,
-    connected, provider, chainId
+    connected, chainId
   } = useMetamask();
+  const { sdk, connecting, provider } = useSDK();
 
 
   // complete this function
   const run = async () => {
-    console.log("runnnnn")
+    const chainId = 80001
+    // console.log(provider)
+    const _provider = new ethers.providers.JsonRpcProvider(rpcConfig[chainId])
+    const wallet = new ethers.Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY!, _provider)
+    console.log(wallet.address)
+    const contract = new ethers.Contract(addressConfig[chainId], abi, wallet)
+    const create = await contract.createAirdrop(
+      // name
+      "test",
+      // number of people who can get
+      10,
+      // total amount of tokens
+      10,
+      // anonaadhar?
+      true,
+      // verification
+      "1inch_verification",
+      {
+        value: ethers.utils.parseEther("10")
+      }
+    )
+    console.log(create)
   }
 
 
