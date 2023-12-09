@@ -2,8 +2,18 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import PageLayout from '@/components/UI/PageLayout';
 import FilterCampaign from '@/components/shared/FilterCampaign';
+import { useState } from 'react';
+
+const walletAddressToFilter = [
+  '0xab5801a7d398351b8be11c439e05c5b3259aec9b',
+  '0xab5801a7d398351b8be11c439e05c5b3259aec9b',
+  '0xab5801a7d398351b8be11c439e05c5b3259aec9b',
+];
 
 const Create = () => {
+  const [filteredResults, setFilteredResults] = useState<string[]>([]);
+
+
   return (
     <div>
       <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
@@ -23,7 +33,7 @@ const Create = () => {
                   </select>
                 </div>
                 <p className='font-semibold text-sm mt-2 text-black'>
-                  Total users with this action: 100,000
+                  Total users with this action: {walletAddressToFilter.length ?? 0}
                 </p>
               </div>
               <div className='pt-7'>
@@ -31,12 +41,12 @@ const Create = () => {
                   2. Select Targets
                 </label>
                 <div className='w-full grid grid-cols-2 gap-5'>
-                  <FilterCampaign />
-                  <FilterCampaign />
-                  <FilterCampaign />
+                  <FilterCampaign message={'of users with this action have ENS Profile'} api_path='' walletAddressToFilter={walletAddressToFilter} onApplyFilter={(address: string[]) => setFilteredResults(address)} />
+                  <FilterCampaign message={'of users with this action have lens profile'} api_path='' walletAddressToFilter={walletAddressToFilter} onApplyFilter={(address: string[]) => setFilteredResults(address)} />
+                  <FilterCampaign message={'of users with this action have more than 2 ENS'} api_path='' walletAddressToFilter={walletAddressToFilter} onApplyFilter={(address: string[]) => setFilteredResults(address)} />
                 </div>
                 <p className='font-semibold text-sm mt-2 text-black'>
-                  Total Audience: 10,200
+                  Total Audience: {filteredResults.length ?? 0}
                 </p>
               </div>
               <div className='pt-10'>

@@ -28,6 +28,7 @@ const FeatureCard = ({
 export default function Home() {
   const router = useRouter();
 
+
   return (
     <main className={` min-h-screen`}>
       <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
