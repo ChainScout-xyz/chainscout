@@ -1,6 +1,7 @@
 import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import PageLayout from '@/components/UI/PageLayout';
+import FilterCampaign from '@/components/shared/FilterCampaign';
 
 const Create = () => {
   return (
@@ -29,61 +30,10 @@ const Create = () => {
                 <label htmlFor='' className='mb-2 block text-black font-bold'>
                   2. Select Targets
                 </label>
-                <div className='w-full flex justify-around items-center'>
-                  <div className='p-3 mr-2 bg-cyan-100 w-52 rounded-lg flex flex-col items-end'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      strokeWidth={1.5}
-                      stroke='currentColor'
-                      className='w-6 h-6 text-green-500 stroke-2 mb-2'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                      />
-                    </svg>
-
-                    <p>60% of users with this action have more than 2 ENS</p>
-                  </div>
-                  <div className='p-3 mr-2 bg-cyan-100 w-52 rounded-lg flex flex-col items-end'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      strokeWidth={1.5}
-                      stroke='currentColor'
-                      className='w-6 h-6 text-green-500 stroke-2 mb-2'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                      />
-                    </svg>
-
-                    <p>60% of users with this action have more than 2 ENS</p>
-                  </div>
-                  <div className='p-3 bg-cyan-100 w-52 rounded-lg flex flex-col items-end'>
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      strokeWidth={1.5}
-                      stroke='currentColor'
-                      className='w-6 h-6 text-green-500 stroke-2 mb-2'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        d='M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                      />
-                    </svg>
-
-                    <p>60% of users with this action have more than 2 ENS</p>
-                  </div>
+                <div className='w-full grid grid-cols-2 gap-5'>
+                  <FilterCampaign />
+                  <FilterCampaign />
+                  <FilterCampaign />
                 </div>
                 <p className='font-semibold text-sm mt-2 text-black'>
                   Total Audience: 10,200
