@@ -5,6 +5,7 @@ import { CardStackIcon, RocketIcon, TargetIcon } from '@radix-ui/react-icons';
 import { Select } from '@radix-ui/themes';
 import { Inter } from 'next/font/google';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,9 +30,12 @@ const FeatureCard = ({
 export default function Home() {
   const router = useRouter();
 
-  // (async function handler() {
-  //   const response = await fetch('/api/integration/huddle');
-  // })();
+  useEffect(() => {
+    (async function handler() {
+      const response = await fetch('/api/integration/onchainInfo');
+      console.log(response);
+    })();
+  }, []);
 
   return (
     <main className={` min-h-screen`}>
@@ -63,26 +67,24 @@ export default function Home() {
       >
         <div className='my-5'>
           <form className='w-96'>
-
             <label htmlFor='' className='mb-2 block'>
               Select On-Chain Action
             </label>
 
-            <Select.Root defaultValue="dai_transfer" size={"3"}>
+            <Select.Root defaultValue='dai_transfer' size={'3'}>
               <Select.Trigger className='select_input' />
               <Select.Content>
                 <Select.Group>
                   <Select.Label>Token</Select.Label>
-                  <Select.Item value="dai_transfer">DAI Transfer</Select.Item>
+                  <Select.Item value='dai_transfer'>DAI Transfer</Select.Item>
                 </Select.Group>
                 <Select.Separator />
                 <Select.Group>
                   <Select.Label>dApps</Select.Label>
-                  <Select.Item value="dapps">1inch</Select.Item>
+                  <Select.Item value='dapps'>1inch</Select.Item>
                 </Select.Group>
               </Select.Content>
             </Select.Root>
-
           </form>
         </div>
 
