@@ -19,5 +19,24 @@ module.exports = {
       chainId: 80001,
       blockConfirmations: 6,
     },
+    scroll: {
+      url: "https://sepolia-rpc.scroll.io/",
+      chainId: 534351,
+      accounts: [PRIVATE_KEY],
+      blockConfirmations: 6,
+    },
+    base_goerli: {
+      url: "https://base-goerli.public.blastapi.io",
+      accounts: [PRIVATE_KEY],
+      chainId: 84531,
+      blockConfirmations: 6,
+
+    },
+    arbitrum: {
+      chainId: 421613,
+      url: "https://arbitrum-goerli.public.blastapi.io",
+      accounts: [PRIVATE_KEY],
+
+    },
   }
 };
