@@ -6,6 +6,7 @@ import { abi, allChainAddress } from '@/constants/contract';
 import useMetamask from '@/hooks/useMetamask';
 import { shortenAddress } from '@/utils';
 import { PushAPI } from '@pushprotocol/restapi';
+import Constants from '@pushprotocol/restapi/src/lib/constants';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
 import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
@@ -116,9 +117,12 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
     const provider = new ethers.providers.Web3Provider((window as any).ethereum, 'any');
     const signer = await provider.getSigner();
 
+    console.log("_________________________________________")
+    console.log("signer")
     console.log(signer)
+    console.log("_________________________________________")
     // Initialize wallet user, pass 'prod' instead of 'staging' for mainnet apps
-    const userAlice = await PushAPI.initialize(provider as any, { env: 'staging' });
+    const userAlice = await PushAPI.initialize(signer as any, { env: Constants.ENV.STAGING });
 
     // Send a notification to users of your protocol
     const apiResponse = await userAlice.channel.send(['0xFf8C547027A357b94c25e1754dD21f0c7f68FD14'], {
