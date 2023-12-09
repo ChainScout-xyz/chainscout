@@ -135,20 +135,45 @@ const ClaimPage = ({ node }: any) => {
 
                                     {!allowed ? <>
 
-                                        <h2 className='text-xl font-bold'>Verify your actions</h2>
+                                        <div className="grid grid-cols-2 gap-5">
 
-                                        <p>
-                                            You have to verify your actions to claim the reward.
-                                        </p>
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsgU658mZEWOGRVwm8rgvodjL_V_Mh7_abSq0cvj5leg&s" alt=""
+                                                className="rounded-md"
+                                            />
 
-                                        <Button
-                                            loading={loading}
-                                            onClick={async () => {
-                                                await verifyUserAction();
-                                            }}>
-                                            <MagicWandIcon className="mr-2" />
-                                            {loading ? 'Loading...' : 'Verify'}
-                                        </Button>
+                                            <div>
+                                                <h2 className='text-xl font-bold'>Swap on 1inch</h2>
+
+
+                                                <p>
+                                                    Make at least 1 Swap on 1inch and claim your reward!
+                                                </p>
+
+                                                <div className="flex items-center space-x-5 mt-10">
+                                                    <a href="https://app.1inch.io//#/1/unified/swap/ETH/DAI"
+                                                        target='_BLANK'
+                                                        className='text-blue-500 hover:text-blue-900'
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        Swap on 1inch
+                                                    </a>
+
+                                                    <Button
+                                                        loading={loading}
+                                                        onClick={async () => {
+                                                            await verifyUserAction();
+                                                        }}>
+                                                        <MagicWandIcon className="mr-2" />
+                                                        {loading ? 'Loading...' : 'Verify'}
+                                                    </Button>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
 
                                     </> : <>
 
