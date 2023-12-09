@@ -20,7 +20,7 @@ const FilterCampaign = ({
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState(false)
     const [filteredResults, setFilteredResults] = useState([])
-    const [percentage, setPercentage] = useState(0)
+    const [percentage, setPercentage] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
