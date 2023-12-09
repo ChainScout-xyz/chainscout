@@ -12,6 +12,7 @@
     "@airstack/node": "^0.0.5",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/themes": "^2.0.2",
+    "ethers": "^6.9.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",

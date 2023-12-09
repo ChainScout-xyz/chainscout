@@ -23,3 +23,7 @@ body {
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   font-family: 'Nunito', sans-serif;
 }
+
+.select_input {
+  width: 386px !important;
+}
