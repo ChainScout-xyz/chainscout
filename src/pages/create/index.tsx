@@ -429,7 +429,7 @@ Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`
                 <div className="mt-5">
                   <Text as="label" size="2" className='mt-5'>
                     <Flex gap="2">
-                      <Switch defaultChecked /> Enable Adhar Verification
+                      <Switch /> Enable Adhar Verification
                     </Flex>
                   </Text>
                 </div>
