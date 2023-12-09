@@ -6,7 +6,7 @@ const Create = () => {
   return (
     <div>
       <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
-      <div className='max-w-5xl mx-auto'>
+      <div className='max-w-5xl mx-auto pb-20'>
         <CardWrapper>
           <div className='flex flex-col justify-center items-center'>
             <p className='text-2xl font-bold mb-5'>Create a Campaign</p>

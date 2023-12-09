@@ -2,8 +2,8 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import PageLayout from '@/components/UI/PageLayout';
 import { CardStackIcon, RocketIcon, TargetIcon } from '@radix-ui/react-icons';
-import { Select } from '@radix-ui/themes';
 import { Inter } from 'next/font/google';
+import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,6 +26,8 @@ const FeatureCard = ({
 };
 
 export default function Home() {
+  const router = useRouter();
+
   return (
     <main className={` min-h-screen`}>
       <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
@@ -68,7 +70,9 @@ export default function Home() {
         </div>
 
         <div className='grid place-items-center'>
-          <Button>
+          <Button onClick={() => {
+            router.push('/create')
+          }}>
             Next{' '}
             <svg
               xmlns='http://www.w3.org/2000/svg'
