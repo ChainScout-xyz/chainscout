@@ -3,9 +3,10 @@ import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
 import PageLayout from '@/components/UI/PageLayout';
 import FilterCampaign from '@/components/shared/FilterCampaign';
+import { shortenAddress } from '@/utils';
+import { useSDK } from '@metamask/sdk-react';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
-import { useSDK } from '@metamask/sdk-react';
 
 
 
@@ -30,20 +31,23 @@ const Create = () => {
       const accounts = await sdk?.connect();
       setAccount((accounts as any)?.[0]);
       console.log('here')
-    } catch(err) {
+    } catch (err) {
       console.warn(`failed to connect..`, err);
     }
   };
+
+
   const disconnect = async () => {
     try {
+      setAccount('');
       await sdk?.disconnect();
       // setAccount((accounts as any)?.[0]);
       console.log('disconnected')
-    } catch(err) {
+    } catch (err) {
       console.warn(`failed to connect..`, err);
     }
   };
-  
+
 
   // complete this function
   const run = async () => {
@@ -87,6 +91,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
       console.log(e)
     }
   }
+
+
+  console.log("account")
+  console.log(account)
 
   return (
     <ContainerWrapper>
@@ -304,6 +312,26 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     </Select.Root>
                   </div>
                 </div>
+
+                <div className='pt-4'>
+                  <label
+                    htmlFor=''
+                    className='mb-2 block text-black font-medium'
+                  >
+
+                    Verification Method
+                  </label>
+                  <div className='w-full'>
+                    <Select.Root size={'3'} defaultValue='1inch_verification'>
+                      <Select.Trigger className='select_input' />
+                      <Select.Content>
+                        <Select.Group>
+                          <Select.Item value='1inch_verification'>1inch Swap Verification</Select.Item>
+                        </Select.Group>
+                      </Select.Content>
+                    </Select.Root>
+                  </div>
+                </div>
                 <div className='pt-4'>
                   <label
                     htmlFor=''
@@ -335,8 +363,18 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                 </div>
               </div>
               <div className='mt-10 w-full flex justify-between items-center'>
-                {connected ? <Button onClick={run}>Run</Button> : <Button onClick={connect}>Connect</Button>}
-                <Button onClick={disconnect}>Disconnect</Button>
+                {account ? <Button onClick={run}>Run</Button> : <Button onClick={connect}>Connect</Button>}
+
+                {account ?
+                  <div className="flex items-center space-x-5">
+
+                    <p>
+                      {account ? <>{shortenAddress(account)}</> : null}
+                    </p>
+
+                    <a className='cursor-pointer text-gray-500 hover:text-gray-900' onClick={disconnect}>Disconnect</a>
+                  </div> : null
+                }
               </div>{' '}
             </form>
           </div>

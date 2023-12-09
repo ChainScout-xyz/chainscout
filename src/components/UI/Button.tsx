@@ -1,11 +1,13 @@
 
-const Button = ({ onClick, children, variant = "primary" }: {
+const Button = ({ onClick, children, variant = "primary", loading = false }: {
   onClick?: any,
+  loading?: boolean
   children: React.ReactNode
   variant?: string
 }) => {
   return (
     <button
+      type={'button'}
       onClick={onClick}
       className={` px-5 py-2  rounded-xl  flex items-center 
             ${variant == "primary" ? 'hover:bg-[#111] bg-[#383838] text-white' : ''}

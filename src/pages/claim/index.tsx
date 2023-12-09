@@ -16,13 +16,39 @@ const Confetti = dynamic(
 
 
 const ClaimPage = () => {
+    const [loading, setLoading] = useState(false)
+    const [allowed, setAllowedStatus] = useState(false)
     const [rewardClaimed, setRewardClaimed] = useState(false);
     const [anonAadhaar] = useAnonAadhaar();
-    const { width, height } = useWindowSize()
+    const { width, height } = useWindowSize();
 
     useEffect(() => {
         console.log("Anon Aadhaar status: ", anonAadhaar.status);
     }, [anonAadhaar]);
+
+    const verifyUserAction = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch('/api/integration/1inch_filter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    wallet_address: '0xaD26A4E7ef85EDccD48451B64029B8082ffDeF18',
+                }),
+            });
+
+            const data = await response.json();
+
+            setAllowedStatus(data.status)
+            setLoading(false);
+
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
 
 
     return (
@@ -47,6 +73,20 @@ const ClaimPage = () => {
                         <div className="grid place-items-center">
                             <div className="space-y-5 w-1/2 grid place-items-center">
 
+                                <h2 className='text-xl font-bold'>Verify your actions</h2>
+
+                                <p>
+                                    You have to verify your actions to claim the reward.
+                                </p>
+
+                                <Button
+                                    loading={loading}
+                                    onClick={async () => {
+                                        await verifyUserAction();
+                                    }}>
+                                    <MagicWandIcon className="mr-2" />
+                                    Verify
+                                </Button>
 
 
                                 <h2 className='text-xl font-bold'>You got the reward 🎉</h2>
@@ -57,6 +97,7 @@ const ClaimPage = () => {
                                 <p>
                                     You have earned 0.1 ETH.
                                 </p>
+
 
                                 <LogInWithAnonAadhaar />
                                 <p>{anonAadhaar?.status}</p>
