@@ -21,7 +21,7 @@ interface Props {
   node: LightNode;
 }
 
-const ClaimPage = ({ node }) => {
+const ClaimPage = ({ node }: Props) => {
   const [loading, setLoading] = useState(false);
   const [allowed, setAllowedStatus] = useState(false);
   const [rewardClaimed, setRewardClaimed] = useState(false);
