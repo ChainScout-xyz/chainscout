@@ -1,10 +1,16 @@
+
 Analyze onchain transactions to find your target audience, create ad campaigns, and reward them for their interaction.
 
 🌏 website : https://chainscout.xyz/
 
 # Motivations
 
-Chain Scout presents a solution for dApp developers facing difficulties in identifying and engaging their ideal Web3 audience. The platform utilizes on-chain transaction analysis to create targeted advertising strategies. This approach allows Web3 projects to precisely connect with users likely to be interested in their products. By offering a more effective and efficient way of audience targeting, the platform aims to enhance user interaction and engagement for Web3 products, addressing a critical gap in the market. This targeted approach is especially valuable in the rapidly evolving Web3 ecosystem, where user engagement is key to success.
+Chain Scout presents a solution for dApp developers facing difficulties in identifying and engaging their ideal Web3 audience. 
+The platform utilizes on-chain transaction analysis to create targeted advertising strategies. 
+This approach allows Web3 projects to precisely connect with users likely to be interested in their products. 
+
+By offering a more effective and efficient way of audience targeting, the platform aims to enhance user interaction and engagement for Web3 products, addressing a critical gap in the market.
+This targeted approach is especially valuable in the rapidly evolving Web3 ecosystem, where user engagement is key to success.
 
 # Solution
 
