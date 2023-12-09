@@ -2,7 +2,7 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
 import FilterCampaign from '@/components/shared/FilterCampaign';
-import { abi, allChainAddress } from '@/constants/contract';
+import { abi, allChainAddress, rpcConfig } from '@/constants/contract';
 import useMetamask from '@/hooks/useMetamask';
 import { shortenAddress } from '@/utils';
 import { useSDK } from '@metamask/sdk-react';
@@ -46,13 +46,8 @@ const Create = () => {
     try {
       await sendXMTPMessage();
       const chainId = 11155111
-      // console.log(provider)
-      const _provider = new ethers.providers.JsonRpcProvider((window as any).ethereum)
-      await (window as any).ethereum.request({ "method": "eth_requestAccounts" });
-      const signer = _provider.getSigner()
-
-      // const wallet = new ethers.Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY!, _provider)
-      // console.log(wallet.address)
+      const provider = new ethers.providers.Web3Provider((window as any).ethereum, 'any');
+      const signer = await provider.getSigner();
       const contract = new ethers.Contract(allChainAddress, abi, signer)
       const value = Number(capacity) * Number(rewardPerWallet)
       const create = await contract.createAirdrop(
