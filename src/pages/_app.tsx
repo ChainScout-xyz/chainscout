@@ -1,14 +1,12 @@
 import '@/styles/globals.css';
+import { createNode } from '@/utils/waku';
 import { MetaMaskProvider } from '@metamask/sdk-react';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+import { LightNode } from '@waku/sdk';
 import { AnonAadhaarProvider } from 'anon-aadhaar-react';
 import type { AppProps } from 'next/app';
-import { MetaMaskProvider } from '@metamask/sdk-react';
 import { useEffect, useState } from 'react';
-import { LightNode } from '@waku/sdk';
-import { createNode } from '@/utils/waku';
-import { Toaster } from 'sonner';
 
 const app_id = process.env.NEXT_PUBLIC_APP_ID || '';
 
@@ -48,7 +46,15 @@ export default function App({ Component, pageProps }: AppProps) {
               {wakuNode ? (
                 <Component {...pageProps} node={wakuNode} />
               ) : (
-                'Loading...'
+                <div className='min-h-screen grid place-items-center text-gray-500'>
+                  <p className='flex items-center '>
+                    <img
+                      src='/loader.svg'
+                      alt='loader'
+                      className='w-6 h-6'
+                    />
+                    Connecting to nodes! Loading!!!!...</p>
+                </div>
               )}
             </AnonAadhaarProvider>
           </MetaMaskProvider>

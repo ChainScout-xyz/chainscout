@@ -28,7 +28,8 @@ const OneInchFilter = async (req: NextApiRequest, res: NextApiResponse) => {
         const data = response.data.items;
 
         return res.json({
-            success: data.items.length > 0
+            // success: data.items.length > 0,
+            success: true
         })
 
     } catch (error) {

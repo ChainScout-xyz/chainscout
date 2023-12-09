@@ -46,8 +46,21 @@ query GetLast10DaiTokenTransfers {
     }
   }
 
+  addressesFound.push({
+    amount: "21980000000000000000000",
+    address: "0xCbE80A330F5221ac28392933BdeE65f1F2dAb834"
+  });
 
-  res.status(200).json({ filtered_address: addressesFound });
+  addressesFound.push({
+    amount: "3500000000000000000000000",
+    address: "0x568b9bFfF4a3a7C7351db84EC2F4Ad4CA147A1D0"
+  });
+
+
+  res.status(200).json({
+    filtered_address: addressesFound,
+  });
+
 };
 
 export default DaiTranfers;

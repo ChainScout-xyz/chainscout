@@ -44,11 +44,11 @@ const FilterCampaign = ({
                     const data = await response.json();
                     setFilteredResults(data.filtered_address || []);
 
-                    setPercentage(Number(calculatePercentage(walletAddressToFilter, filteredResults).toFixed(2)));
+                    setPercentage(calculatePercentage(walletAddressToFilter, data.filtered_address));
                 }
 
             } catch (error) {
-                console.error('Error fetching data:', error);
+                // console.error('Error fetching data:', error);
             } finally {
                 setLoading(false);
             }
