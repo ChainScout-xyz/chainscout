@@ -2,16 +2,14 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
 import FilterCampaign from '@/components/shared/FilterCampaign';
-import { abi, allChainAddress, rpcConfig } from '@/constants/contract';
+import { abi, allChainAddress } from '@/constants/contract';
 import useMetamask from '@/hooks/useMetamask';
 import { shortenAddress } from '@/utils';
 import { PushAPI } from '@pushprotocol/restapi';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { useWalletClient } from 'wagmi';
 
 
 const PageLayout = dynamic(
@@ -21,7 +19,6 @@ const PageLayout = dynamic(
 )
 
 const Create = () => {
-  const signer = useWalletClient();
 
   const [campaignName, setCampaignName] = useState('');
   const [message, setMessage] = useState<string>('');
@@ -116,7 +113,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
 
   const sendPushNotification = async () => {
 
+    const provider = new ethers.providers.Web3Provider((window as any).ethereum, 'any');
+    const signer = await provider.getSigner();
 
+    console.log(signer)
     // Initialize wallet user, pass 'prod' instead of 'staging' for mainnet apps
     const userAlice = await PushAPI.initialize(provider as any, { env: 'staging' });
 
@@ -413,7 +413,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
               </button>
               <div className='mt-10 w-full flex justify-between items-center'>
                 {account ? <Button onClick={run}>Run</Button> : <>
-                  <ConnectButton />
+                  <Button onClick={connect}>Connect</Button>
                 </>}
 
                 {account ?
