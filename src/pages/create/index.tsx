@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 
 const Create = () => {
+  const [dataLoading, setDataLoading] = useState<boolean>(false)
   const [apiResponse, setApiResponse] = useState<any>(null);
   const [walletAddressToFilter, setWalletAddressToFilter] = useState<string[]>([])
   const [filteredResults, setFilteredResults] = useState<string[]>([]);
@@ -14,11 +15,13 @@ const Create = () => {
 
   useEffect(() => {
     (async function handler() {
+      setDataLoading(true)
       const response = await fetch('/api/integration/dai_transfers');
       const data = await response.json()
       setApiResponse(data.filtered_address);
       const walletList = data.filtered_address?.map((item: any) => item.address);
       setWalletAddressToFilter(walletList)
+      setDataLoading(false)
     })();
   }, []);
 
@@ -57,21 +60,33 @@ const Create = () => {
               </div>
 
               <div className="bg-gray-50 rounded-lg mt-5 border">
-                {apiResponse?.map((item: any) => (<>
-                  <div className='flex justify-between items-center p-4 border-b border-gray-200'>
+                {dataLoading ? <>
+                  <div className='flex justify-center items-center p-4 border-b border-gray-200 text-center'>
+                    <div className='flex items-center justify-center w-full'>
+                      <p className='text-sm font-medium mr-2 flex items-center text-center'>
+                        <img src="/loader.svg" alt="loader" className="w-6 h-6" />
 
-                    <div className='flex items-center justify-between w-full'>
-                      <p className='text-sm font-medium mr-2'>{item.address}</p>
-                      <p className='text-sm font-medium flex items-center'>
-                        {(item.amount / 10 ** 18).toFixed(3)} DAI
-                        <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png" alt="" className='w-4 h-4 ml-1' />
-                      </p>
+                        Loading...</p>
                     </div>
                   </div>
-                </>))}
-                <div className='text-center py-1 text-sm'>
-                  {walletAddressToFilter.length ?? 50} More records
-                </div>
+                </> : <>
+
+                  {apiResponse?.map((item: any) => (<>
+                    <div className='flex justify-between items-center p-4 border-b border-gray-200'>
+
+                      <div className='flex items-center justify-between w-full'>
+                        <p className='text-sm font-medium mr-2'>{item.address}</p>
+                        <p className='text-sm font-medium flex items-center'>
+                          {(item.amount / 10 ** 18).toFixed(3)} DAI
+                          <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png" alt="" className='w-4 h-4 ml-1' />
+                        </p>
+                      </div>
+                    </div>
+                  </>))}
+                  <div className='text-center py-1 text-sm'>
+                    {walletAddressToFilter.length ?? 50} More records
+                  </div>
+                </>}
               </div>
               <div className='pt-7'>
                 <label htmlFor='' className='mb-2 block text-black font-bold'>
