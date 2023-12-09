@@ -4,12 +4,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const OnChainInfo = async (req: NextApiRequest, res: NextApiResponse) => {
   init(process.env.AIRSTACK_API_KEY!);
 
-  const walletAddress = ['0xFf8C547027A357b94c25e1754dD21f0c7f68FD14'];
+  const walletAddress = '0xFf8C547027A357b94c25e1754dD21f0c7f68FD14';
   const crypto = [];
   const nfts = [];
 
   const variables = {
-    _in: walletAddress,
+    address: walletAddress,
   };
 
   const { data, error } = await fetchQuery(
@@ -86,6 +86,7 @@ const OnChainInfo = async (req: NextApiRequest, res: NextApiResponse) => {
     variables
   );
 
+  console.log(data);
   console.log(error);
 
   if (data) {
