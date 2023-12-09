@@ -4,12 +4,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const DaiTranfers = async (req: NextApiRequest, res: NextApiResponse) => {
   init(process.env.AIRSTACK_API_KEY!);
 
-  const walletAddress = ['0xf1996154C34e3dc77b26437a102231785e9aD7fE'];
   const addressesFound = [];
 
-  const variables = {
-    _in: walletAddress,
-  };
+  const variables = {};
 
   const { data, error } = await fetchQuery(
     `
@@ -49,7 +46,6 @@ query GetLast10DaiTokenTransfers {
     }
   }
 
-  console.log(addressesFound);
 
   res.status(200).json({ filtered_address: addressesFound });
 };

@@ -6,6 +6,7 @@ import { Select } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
 
 const Create = () => {
+  const [message, setMessage] = useState<string>('');
   const [dataLoading, setDataLoading] = useState<boolean>(false);
   const [apiResponse, setApiResponse] = useState<any>(null);
   const [walletAddressToFilter, setWalletAddressToFilter] = useState<string[]>(
@@ -26,6 +27,28 @@ const Create = () => {
       setDataLoading(false);
     })();
   }, []);
+
+  const sendXMTPMessage = async () => {
+    try {
+      const response = await fetch('/api/integration/xmtp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          wallet_address: [
+            '0xCbE80A330F5221ac28392933BdeE65f1F2dAb834',
+            '0xaD26A4E7ef85EDccD48451B64029B8082ffDeF18'
+          ],
+          message: `${message} 
+Claim Reward: ${'https://chainscout.xyz/claim'}`,
+        }),
+      });
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <div>
@@ -183,6 +206,8 @@ const Create = () => {
                   </label>
                   <div className='w-full'>
                     <textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
                       required
                     />
