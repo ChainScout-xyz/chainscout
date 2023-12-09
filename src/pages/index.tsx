@@ -48,18 +48,23 @@ export default function Home() {
           <div className='mx-auto max-w-5xl grid grid-cols-3 gap-5 m-10 pt-7 pb-8 place-items-center mb-[80px]'>
             <FeatureCard
               icon={<CardStackIcon className='w-10 h-10 mb-2' />}
-              title='Choose Action'
-              description='Analyze onchain transaction and find “Lookalike” audience'
+              title='Select on-chain action to analyze'
+              description='Analyze on-chain transactions and find your target audience'
             />
             <FeatureCard
               icon={<TargetIcon className='w-10 h-10 mb-2' />}
+              title='Filter target data'
+              description='Filter the analyzed target audience by setting mandatory requirements'
+            />
+             <FeatureCard
+              icon={<KeyboardIcon className='w-10 h-10 mb-2' />}
               title='Create Campaign'
-              description='Analyze onchain transaction and find “Lookalike” audience'
+              description='Configure the ad campaign and select communication method to reach your target audience'
             />
             <FeatureCard
               icon={<RocketIcon className='w-10 h-10 mb-2' />}
-              title='Boom! Done'
-              description='Analyze onchain transaction and find “Lookalike” audience'
+              title='Reward your users'
+              description="Set claimable rewards for users' interaction post campaign completion"
             />
           </div>
         </div>
