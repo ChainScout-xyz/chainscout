@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <ContainerWrapper>
       <main className={` min-h-screen`}>
-        <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
+        <PageLayout title='Discover new information, make informed decisions and make life easy for your business and your customers' />
 
         <div className='bg-[#272727] rounded-2xl p-3 pl-20'>
           <div className='mx-auto max-w-6xl grid grid-cols-4 gap-5 pt-7 pb-8 place-items-center mb-[80px]'>
