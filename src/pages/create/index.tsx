@@ -1,5 +1,6 @@
 import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
+import ContainerWrapper from '@/components/UI/ContainerWrapper';
 import PageLayout from '@/components/UI/PageLayout';
 import FilterCampaign from '@/components/shared/FilterCampaign';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
@@ -9,6 +10,7 @@ const Create = () => {
   const [message, setMessage] = useState<string>('');
   const [rewardPerWallet, setRewardPerWallet] = useState<string>('');
   const [capacity, setCapacity] = useState<string>('');
+  const [mesageProvider, setMessageProvider] = useState<string>('');
 
   const [dataLoading, setDataLoading] = useState<boolean>(false);
   const [apiResponse, setApiResponse] = useState<any>(null);
@@ -54,7 +56,8 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
   }
 
   return (
-    <div>
+    <ContainerWrapper>
+
       <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
       <div className='max-w-5xl mx-auto pb-20'>
         <CardWrapper>
@@ -191,10 +194,8 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     How to Contact{' '}
                   </label>
                   <div className='w-full flex items-center'>
-                    <div className='p-3 border rounded-lg mr-2'>
-                      Push Protocol
-                    </div>
-                    <div className='p-3 border rounded-lg mr-2'>XMTP</div>
+                    <div className={`p-3 border rounded-lg mr-2 cursor-pointer ${mesageProvider == "push" ? "border-2 border-[#978365]" : ''}`} onClick={() => setMessageProvider('push')}>Push Protocol </div>
+                    <div className={`p-3 border rounded-lg mr-2 cursor-pointer ${mesageProvider == "xmtp" ? "border-2 border-[#978365]" : ''}`} onClick={() => setMessageProvider('xmtp')}>XMTP</div>
                   </div>
                 </div>
                 <div className='pt-4'>
@@ -307,7 +308,8 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
           </div>
         </CardWrapper>
       </div>
-    </div>
+
+    </ContainerWrapper>
   );
 };
 

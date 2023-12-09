@@ -3,8 +3,8 @@ const PageLayout = ({ title }: { title?: string }) => {
     return (
         <>
             <div className="mb-10 grid place-items-center">
-                <img src="/logo.png" alt="" className='h-40' />
-                <p className='mx-2 text-xl mt-10'>
+                <img src="/logo.png" alt="" />
+                <p className='mx-2 text-xl mt-10 h-20'>
                     {title}
                 </p>
             </div>
