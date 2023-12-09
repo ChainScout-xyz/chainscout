@@ -152,8 +152,6 @@ Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`
 
   }
 
-  console.log("walletAddressToFilter")
-  console.log(walletAddressToFilter)
 
   return (
     <ContainerWrapper>

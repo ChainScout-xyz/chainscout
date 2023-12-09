@@ -74,7 +74,6 @@ const ClaimPage = ({ node }: any) => {
             const data = await response.json();
 
             setClaimResponse(data);
-            console.log(data);
 
             if (data.success == false) {
                 toast.error(
@@ -84,7 +83,6 @@ const ClaimPage = ({ node }: any) => {
 
             setAllowedStatus(data.success);
             setLoading(false);
-            console.log(gas.data.estimatedBaseFee)
 
         } catch (e) {
             console.log(e);
