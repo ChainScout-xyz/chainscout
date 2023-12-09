@@ -8,7 +8,7 @@ export const calculatePercentage = (array1: string[], array2: string[]) => {
     // Step 3: Calculate the percentage
     const percentage = (commonAddresses.length / totalAddresses) * 100;
 
-    return percentage;
+    return Number(percentage);
 };
 
 

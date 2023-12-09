@@ -4,43 +4,48 @@ import { useEffect, useState } from "react"
 import AdvancedFilter from "../Modal/AdvancedFilter"
 
 const FilterCampaign = ({
+    label,
     walletAddressToFilter,
     onApplyFilter,
     api_path,
     message
 }: {
+    label: string,
     walletAddressToFilter: string[],
     onApplyFilter: (address: string[]) => void
     api_path: string
     message: string
 }) => {
+
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState(false)
     const [filteredResults, setFilteredResults] = useState([])
     const [percentage, setPercentage] = useState(0)
 
     useEffect(() => {
-
         const fetchData = async () => {
             try {
-                setLoading(true);
+                if (walletAddressToFilter.length === 0) { }
+                else {
+                    setLoading(true);
 
-                const response = await fetch(`/api/integration/${api_path}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ walletAddress: walletAddressToFilter }),
-                });
+                    const response = await fetch(`/api/integration/${api_path}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ walletAddress: walletAddressToFilter }),
+                    });
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+                    setFilteredResults(data.filtered_address || []);
+
+                    setPercentage(Number(calculatePercentage(walletAddressToFilter, filteredResults).toFixed(2)));
                 }
-
-                const data = await response.json();
-                setFilteredResults(data.filtered_address || []);
-
-                setPercentage(calculatePercentage(walletAddressToFilter, filteredResults));
 
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -61,11 +66,13 @@ const FilterCampaign = ({
 
     return (
         <section className="relative filter_card">
-            <div onClick={ApplyFilter} className='p-3 bg-gray-50 border rounded-lg cursor-pointer h-24 grid place-items-center'
+            <div onClick={ApplyFilter} className='p-3 bg-gray-50 border rounded-lg cursor-pointer h-[113px] grid place-items-center'
                 style={{
                     background: selected ? "linear-gradient(rgb(240, 250, 246) 0%, rgb(255, 255, 255) 68.8196%)" : ""
                 }}
             >
+                <p className="w-full text-left text-gray-700 font-medium">{label}</p>
+
                 {loading ? <>
                     <div className="flex items-center">
                         <img src="/loader.svg" alt="" className="w-5 h-5 mr-1" />
@@ -85,7 +92,15 @@ const FilterCampaign = ({
                         style={{
                             position: "absolute",
                         }}
-                        src="https://cryptologos.cc/logos/ethereum-name-service-ens-logo.svg?v=029" className="w-14 absolute bottom-[10px] h-14 relative right-0 gray_scale" />
+                        src="ens.svg" className="w-14 absolute bottom-[10px] h-14 relative right-0 gray_scale" />
+                    : null}
+
+                {api_path === "farcaster" ?
+                    <img
+                        style={{
+                            position: "absolute",
+                        }}
+                        src="farcaster.png" className="w-14 absolute bottom-[20px] h-14 relative right-0 gray_scale" />
                     : null}
             </div>
             <AdvancedFilter />

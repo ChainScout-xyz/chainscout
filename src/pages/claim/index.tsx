@@ -14,13 +14,24 @@ import { toast } from 'sonner';
 
 const Confetti = dynamic(() => import('react-confetti'), { ssr: false });
 
-const PageLayout = dynamic(() => import('@/components/UI/PageLayout'), {
-  ssr: false,
-});
+import RewardCard from "@/components/shared/RewardCard";
+import useMetamask from "@/hooks/useMetamask";
+import { MagicWandIcon } from "@radix-ui/react-icons";
+import { useAnonAadhaar } from "anon-aadhaar-react";
+import { useEffect, useState } from "react";
+import useWindowSize from 'react-use/lib/useWindowSize';
+import { toast } from "sonner";
 
-interface Props {
-  node: LightNode;
+const Confetti = dynamic(
+    () => import('react-confetti'),
+    { ssr: false }
+);
+
+const PageLayout = dynamic(
+    () => import('@/components/UI/PageLayout'), {
+    ssr: false
 }
+)
 
 const ClaimPage = ({ node }: Props) => {
   const [loading, setLoading] = useState(false);

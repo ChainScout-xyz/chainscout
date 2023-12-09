@@ -1,13 +1,14 @@
 import '@/styles/globals.css';
+import { MetaMaskProvider } from '@metamask/sdk-react';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import { AnonAadhaarProvider } from 'anon-aadhaar-react';
 import type { AppProps } from 'next/app';
 import { MetaMaskProvider } from '@metamask/sdk-react';
-
 import { useEffect, useState } from 'react';
 import { LightNode } from '@waku/sdk';
 import { createNode } from '@/utils/waku';
+import { Toaster } from 'sonner';
 
 const app_id = process.env.NEXT_PUBLIC_APP_ID || '';
 
@@ -15,7 +16,6 @@ export default function App({ Component, pageProps }: AppProps) {
   const [wakuNode, setWakuNode] = useState<LightNode | null>(null);
   useEffect(() => {
     if (wakuNode) return;
-
     (async () => {
       console.log('starting node');
       const node = await createNode();

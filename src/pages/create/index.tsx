@@ -2,11 +2,15 @@ import Button from '@/components/UI/Button';
 import CardWrapper from '@/components/UI/CardWrapper';
 import ContainerWrapper from '@/components/UI/ContainerWrapper';
 import FilterCampaign from '@/components/shared/FilterCampaign';
+import { abi, allChainAddress, rpcConfig } from '@/constants/contract';
 import useMetamask from '@/hooks/useMetamask';
 import { shortenAddress } from '@/utils';
+import { useSDK } from '@metamask/sdk-react';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
+import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import XMTPSendMessage from '../api/integration/xmtp';
 
 
 const PageLayout = dynamic(
@@ -16,6 +20,7 @@ const PageLayout = dynamic(
 )
 
 const Create = () => {
+  const [campaignName, setCampaignName] = useState('');
   const [message, setMessage] = useState<string>('');
   const [rewardPerWallet, setRewardPerWallet] = useState<string>('');
   const [capacity, setCapacity] = useState<string>('');
@@ -32,13 +37,44 @@ const Create = () => {
     connect,
     disconnect,
     account,
-    connected, provider, chainId
+    connected, chainId
   } = useMetamask();
+  const { sdk, connecting, provider } = useSDK();
 
 
-  // complete this function
+
   const run = async () => {
-    console.log("runnnnn")
+    try{
+      await sendXMTPMessage();
+      const chainId = 11155111
+    // console.log(provider)
+    const _provider = new ethers.providers.JsonRpcProvider((window as any).ethereum)
+    await (window as any).ethereum.request({"method": "eth_requestAccounts"});
+    const signer = _provider.getSigner()
+    
+    // const wallet = new ethers.Wallet(process.env.NEXT_PUBLIC_PRIVATE_KEY!, _provider)
+    // console.log(wallet.address)
+    const contract = new ethers.Contract(allChainAddress, abi, signer)
+    const value = Number(capacity) * Number(rewardPerWallet)
+    const create = await contract.createAirdrop(
+      campaignName,
+      // number of people who can get
+      capacity,
+      // total amount of tokens
+      value,
+      // anonaadhar?
+      true,
+      // verification
+      "1inch_verification",
+      {
+        value: ethers.utils.parseEther(value.toString())
+      }
+    )
+    console.log(create)
+    }
+    catch(err) {
+      console.error(err)
+    }
   }
 
 
@@ -80,8 +116,8 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
   }
 
 
-  console.log("account")
-  console.log(account)
+  console.log("walletAddressToFilter")
+  console.log(walletAddressToFilter)
 
   return (
     <ContainerWrapper>
@@ -169,6 +205,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                 </label>
                 <div className='w-full grid grid-cols-2 gap-5'>
                   <FilterCampaign
+                    label="Lens"
                     message={'of users with this action have Lens Profile'}
                     api_path='lens_profile'
                     walletAddressToFilter={walletAddressToFilter}
@@ -177,6 +214,7 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     }
                   />
                   <FilterCampaign
+                    label='ENS'
                     message={'of users with this action have ENS'}
                     api_path='ens_filter'
                     walletAddressToFilter={walletAddressToFilter}
@@ -185,8 +223,9 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     }
                   />
                   <FilterCampaign
-                    message={'of users with this action have more than 2 ENS'}
-                    api_path='nft_addresses'
+                    label="Farcaster"
+                    message={'of users with this action have Farcaster Account'}
+                    api_path='farcaster'
                     walletAddressToFilter={walletAddressToFilter}
                     onApplyFilter={(address: string[]) =>
                       setFilteredResults(address)
@@ -210,7 +249,10 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                     Campaign Name{' '}
                   </label>
 
-                  <TextField.Input size="3" placeholder="" />
+                  <TextField.Input size="3" placeholder=""
+                    value={campaignName}
+                    onChange={(e) => setCampaignName(e.target.value)}
+                  />
 
 
                 </div>

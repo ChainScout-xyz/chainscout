@@ -4,14 +4,15 @@ const axios = require("axios");
 const OneInchFilter = async (req: NextApiRequest, res: NextApiResponse) => {
 
     // Extract walletAddress from the POST request body
-    const { walletAddress } = req.body;
+    const { wallet_address } = req.body;
 
-    if (!walletAddress || !Array.isArray(walletAddress)) {
+
+    if (!wallet_address) {
         return res.status(400).json({ error: 'Invalid wallet address provided' });
     }
 
 
-    const url = `https://api.1inch.dev/history/v2.0/history/${walletAddress}/events`;
+    const url = `https://api.1inch.dev/history/v2.0/history/${wallet_address}/events`;
 
 
     const config = {
