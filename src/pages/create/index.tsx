@@ -5,6 +5,9 @@ import PageLayout from '@/components/UI/PageLayout';
 import FilterCampaign from '@/components/shared/FilterCampaign';
 import { Flex, Select, Switch, Text, TextArea, TextField } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
+import { useSDK } from '@metamask/sdk-react';
+
+
 
 const Create = () => {
   const [message, setMessage] = useState<string>('');
@@ -18,6 +21,26 @@ const Create = () => {
     []
   );
   const [filteredResults, setFilteredResults] = useState<string[]>([]);
+
+  const [account, setAccount] = useState<string>();
+  const { sdk, connected, provider, chainId } = useSDK();
+
+  const connect = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      setAccount((accounts as any)?.[0]);
+      console.log('here')
+    } catch(err) {
+      console.warn(`failed to connect..`, err);
+    }
+  };
+
+  // complete this function
+  const run = async () => {
+    console.log("runnnnn")
+  }
+
+
 
   useEffect(() => {
     (async function handler() {
@@ -302,7 +325,8 @@ Claim Reward: ${'https://chainscout.xyz/claim'}`,
                 </div>
               </div>
               <div className='mt-10 w-full flex justify-between items-center'>
-                <Button>Run</Button>
+                {connected ? <Button onClick={run}>Run</Button> : <Button onClick={connect}>Connect</Button>}
+                
               </div>{' '}
             </form>
           </div>
