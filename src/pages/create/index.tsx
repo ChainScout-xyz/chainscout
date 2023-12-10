@@ -12,6 +12,7 @@ import { ethers } from 'ethers';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 
 const PageLayout = dynamic(
@@ -55,6 +56,9 @@ const Create = () => {
       else {
         await sendXMTPMessage();
       }
+
+      toast('Campaign created successfully! Ads sent out to the audience.');
+
 
       const chainId = 11155111
       const provider = new ethers.providers.Web3Provider((window as any).ethereum, 'any');
