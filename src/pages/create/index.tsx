@@ -162,7 +162,7 @@ Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`
   return (
     <ContainerWrapper>
 
-      <PageLayout title='Analyze onchain transaction and find “Lookalike” audience' />
+      <PageLayout title='Discover new information, make informed decisions and make life easy for your business and your customers' />
       <div className='max-w-5xl mx-auto pb-20'>
         <CardWrapper>
           <div className='flex flex-col justify-center items-center'>
