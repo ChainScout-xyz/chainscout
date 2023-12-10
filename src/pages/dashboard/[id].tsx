@@ -25,6 +25,34 @@ const campaigns = [
     address: '0xFf8C547027A357b94c25e1754dD21f0c7f68FD14',
     status: false,
   },
+  {
+    address: '0xbe0eb53f46cd790cd13851d5eff43d12404d33e8',
+    status: false,
+  },
+  {
+    address: '0xf977814e90da44bfa03b6295a0616a897441acec',
+    status: false,
+  },
+  {
+    address: '0x0c05ec4db907cfb91b2a1a29e7b86688b7568a6d',
+    status: false,
+  },
+  {
+    address: '0x567890abcdef01234567890abcdef01234567890',
+    status: false,
+  },
+  {
+    address: '0xd47b4a4c6207b1ee0eb1dd4e5c46a19b50fec00b',
+    status: false,
+  },
+  {
+    address: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
+    status: false,
+  },
+  {
+    address: '0x8696e84ab5e78983f2456bcb5c199eea9648c8c2',
+    status: false,
+  },
 ];
 
 const Index = ({ node }: Props) => {
