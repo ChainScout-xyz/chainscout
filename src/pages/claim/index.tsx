@@ -211,6 +211,12 @@ const ClaimPage = ({ node }: any) => {
                                             <Button onClick={async () => {
                                                 await claimReward()
                                                 setRewardClaimed(true);
+                                                try {
+                                                    await sendWakuMessage()
+                                                }
+                                                catch (e) {
+                                                    console.log(e)
+                                                }
                                             }}>
 
                                                 <MagicWandIcon className="mr-2" />
