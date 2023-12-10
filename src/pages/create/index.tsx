@@ -361,6 +361,7 @@ Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`
                           <Select.Item value='zkevm'>Polygon zkevm</Select.Item>
                           <Select.Item value='mantle'>Mantle</Select.Item>
                           <Select.Item value='scroll'>Scroll</Select.Item>
+                          <Select.Item value='base'>Base</Select.Item>
                         </Select.Group>
                       </Select.Content>
                     </Select.Root>
