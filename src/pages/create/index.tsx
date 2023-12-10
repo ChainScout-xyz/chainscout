@@ -80,7 +80,9 @@ const Create = () => {
       router.push('/dashboard/1')
     }
     catch (err) {
+      console.error("__________&&&&&&&&***___")
       console.error(err)
+      console.error("__________&&&&&&&&***___")
     }
     setLoading(false);
   }

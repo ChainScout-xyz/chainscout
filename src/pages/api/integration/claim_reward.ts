@@ -20,7 +20,7 @@ const ClaimReward = async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
         const response = await claim({
-            id: 0,
+            id: 2,
             address: wallet_address
         })
 
