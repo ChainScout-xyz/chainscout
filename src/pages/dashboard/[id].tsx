@@ -74,7 +74,6 @@ const Index = ({ node }: Props) => {
           if (campaigns[i].address == res[0]) {
             console.log(campaigns[i]);
             campaigns[i].status = true;
-            break;
           }
         }
         console.log(campaigns);
