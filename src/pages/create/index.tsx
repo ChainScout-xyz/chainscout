@@ -357,6 +357,7 @@ Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`
                       <Select.Content>
                         <Select.Group>
                           <Select.Item value='polygon'>Polygon</Select.Item>
+                          <Select.Item value='sepolia'>Sepolia</Select.Item>
                           <Select.Item value='celo'>Celo</Select.Item>
                           <Select.Item value='xdc'>xDC</Select.Item>
                           <Select.Item value='arb'>Arbitrum</Select.Item>
@@ -393,10 +394,11 @@ Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`
                     Currency{' '}
                   </label>
                   <div className='w-full'>
-                    <Select.Root size={'3'} defaultValue='matic'>
+                    <Select.Root size={'3'} defaultValue='eth'>
                       <Select.Trigger className='select_input' />
                       <Select.Content>
                         <Select.Group>
+                          <Select.Item value='eth'>ETH</Select.Item>
                           <Select.Item value='matic'>Matic</Select.Item>
                         </Select.Group>
                       </Select.Content>
@@ -422,7 +424,7 @@ Claim Reward: ${'https://chainscout.xyz/claim?campaign_id=hfweihiuh43yeoihoif'}`
                   </div>
                   {capacity && rewardPerWallet ? <>
                     <p className='font-semibold text-sm mt-2 text-black'>
-                      Total Reward spent : {Number(capacity ?? 0) * Number(rewardPerWallet ?? 0)} MATIC{' '}
+                      Total Reward spent : {Number(capacity ?? 0) * Number(rewardPerWallet ?? 0)} ETH{' '}
                     </p>
                   </> : null}
                 </div>
